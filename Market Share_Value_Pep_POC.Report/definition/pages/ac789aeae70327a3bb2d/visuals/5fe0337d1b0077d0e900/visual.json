@@ -1,0 +1,84 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.6.0/schema.json",
+  "name": "5fe0337d1b0077d0e900",
+  "position": {
+    "x": 9.6055210305030236,
+    "y": 0,
+    "z": 0,
+    "height": 540.65361228831307,
+    "width": 378.73197205983354,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "City Order"
+                    }
+                  },
+                  "Property": "store_city"
+                }
+              },
+              "queryRef": "City Order.store_city",
+              "nativeQueryRef": "store_city"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "0.0 custom_date"
+                    }
+                  },
+                  "Property": "own_market_share"
+                }
+              },
+              "queryRef": "0.0 custom_date.own_market_share",
+              "nativeQueryRef": "own_market_share"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "6d8cab604e3cd191cb11",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "City Order"
+              }
+            },
+            "Property": "store_city"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "4de6705c30161b1db305",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "0.0 custom_date"
+              }
+            },
+            "Property": "own_market_share"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}
