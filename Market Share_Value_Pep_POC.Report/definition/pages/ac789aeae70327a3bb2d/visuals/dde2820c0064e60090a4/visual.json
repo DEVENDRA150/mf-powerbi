@@ -1,0 +1,107 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.6.0/schema.json",
+  "name": "dde2820c0064e60090a4",
+  "position": {
+    "x": 461.06500946414513,
+    "y": 75.47195095395233,
+    "z": 1,
+    "height": 465.18166133436074,
+    "width": 753.34729224945147,
+    "tabOrder": 1
+  },
+  "visual": {
+    "visualType": "lineChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "City Order"
+                    }
+                  },
+                  "Property": "store_city"
+                }
+              },
+              "queryRef": "City Order.store_city",
+              "nativeQueryRef": "store_city",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "0.0 custom_date"
+                    }
+                  },
+                  "Property": "own_market_share"
+                }
+              },
+              "queryRef": "0.0 custom_date.own_market_share",
+              "nativeQueryRef": "own_market_share"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "0.0 custom_date"
+                  }
+                },
+                "Property": "own_market_share"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "2d1e266640ba42d80b34",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "City Order"
+              }
+            },
+            "Property": "store_city"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "fd1d86f83154602e4c85",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "0.0 custom_date"
+              }
+            },
+            "Property": "own_market_share"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

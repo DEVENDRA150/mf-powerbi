@@ -66,6 +66,23 @@ table 'Store id-mappping'
 
 		annotation SummarizationSetBy = Automatic
 
+	column store_address
+		dataType: int64
+		formatString: 0
+		lineageTag: 56b86552-22e8-428a-a3c6-f6a18dd505c2
+		summarizeBy: none
+		sourceColumn: store_address
+
+		annotation SummarizationSetBy = Automatic
+
+	column secondary_store_id
+		dataType: string
+		lineageTag: a9dfd7a9-7fa8-4d99-9b4d-4e24a74889c9
+		summarizeBy: none
+		sourceColumn: secondary_store_id
+
+		annotation SummarizationSetBy = Automatic
+
 	partition 'Store id-mappping' = m
 		mode: import
 		source =
