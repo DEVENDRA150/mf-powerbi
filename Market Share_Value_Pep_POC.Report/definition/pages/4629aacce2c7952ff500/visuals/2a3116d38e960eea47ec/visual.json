@@ -1,0 +1,108 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "2a3116d38e960eea47ec",
+  "position": {
+    "x": 244.79740680713127,
+    "y": 616.14262560777956,
+    "z": 13000,
+    "height": 74.68395461912479,
+    "width": 487.52025931928682,
+    "tabOrder": 13000
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Category Size",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontFamily": "DIN",
+                      "fontSize": "9pt"
+                    }
+                  },
+                  {
+                    "value": " → Total sales value of the category in the market.",
+                    "textStyle": {
+                      "fontFamily": "DIN",
+                      "fontSize": "9pt"
+                    }
+                  }
+                ],
+                "listType": "bullet"
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Avg Share (Last 7 Days)",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontFamily": "DIN",
+                      "fontSize": "9pt"
+                    }
+                  },
+                  {
+                    "value": " → The brand’s average share of the category over the past week.",
+                    "textStyle": {
+                      "fontFamily": "DIN",
+                      "fontSize": "9pt"
+                    }
+                  }
+                ],
+                "listType": "bullet"
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": "Latest Share (D-1)",
+                    "textStyle": {
+                      "fontWeight": "bold",
+                      "fontFamily": "DIN",
+                      "fontSize": "9pt"
+                    }
+                  },
+                  {
+                    "value": " → The brand’s share in the category as of yesterday.",
+                    "textStyle": {
+                      "fontFamily": "DIN",
+                      "fontSize": "9pt"
+                    }
+                  }
+                ],
+                "listType": "bullet"
+              },
+              {
+                "textRuns": [
+                  {
+                    "value": ""
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "background": [
+        {
+          "properties": {
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "26D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

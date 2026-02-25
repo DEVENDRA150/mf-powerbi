@@ -1,0 +1,310 @@
+table Book1
+	lineageTag: 70b4888b-0ac0-42e7-a98d-209520159073
+
+	measure 'Share 30days %' = ```
+			
+			VAR numm_ = CALCULATE([Revenue30days],Book1[Brand_type_] = "Own")
+			
+			// /CALCULATE(SUMX('market_share_last_30 days','market_share_last_30 days'[inventory_change] * 'market_share_last_30 days'[mrp]),'market_share_last_30 days'[brand_type] = "Own")
+			
+			VAR denom_ = [Revenue30days]
+			// CALCULATE(SUMX('market_share_last_30 days','market_share_last_30 days'[inventory_change] * 'market_share_last_30 days'[mrp]))
+			
+			RETURN
+			DIVIDE ( numm_, denom_ ) 
+			
+			```
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 98f375ab-99a0-43ff-a181-892d16d059be
+
+	measure 'DOD_Change_%_Series 30 days' = ```
+			
+			VAR SharePrev =
+			    CALCULATE(
+			        [Share 30days %],
+			        DATEADD('Calendar'[Date], -1, DAY)
+			    )
+			RETURN
+			    ([Share 30days %] - SharePrev)
+			
+			```
+		lineageTag: 0ae97e07-facb-4565-a3e6-4a9764cd2674
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column backend_inserted_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: b720d924-afe5-474c-bc5f-7df44a6fb32b
+		summarizeBy: none
+		sourceColumn: backend_inserted_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column customer
+		dataType: string
+		lineageTag: 6a8aad18-752f-47d3-8720-b7905df2df24
+		summarizeBy: none
+		sourceColumn: customer
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_code
+		dataType: string
+		lineageTag: cc04351c-a13c-411a-a792-b0cde99219cb
+		summarizeBy: none
+		sourceColumn: product_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column hash_id
+		dataType: string
+		lineageTag: abc9edf9-8347-4ad3-a8d2-78a4830c8f08
+		summarizeBy: none
+		sourceColumn: hash_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column platform
+		dataType: string
+		lineageTag: ee0d123a-36ca-4506-9964-96ef7d378efb
+		summarizeBy: none
+		sourceColumn: platform
+
+		annotation SummarizationSetBy = Automatic
+
+	column asp
+		dataType: int64
+		formatString: 0
+		lineageTag: 5e411927-c64a-49b4-9c07-d8aa0ae4f3a4
+		summarizeBy: sum
+		sourceColumn: asp
+
+		annotation SummarizationSetBy = Automatic
+
+	column discount
+		dataType: int64
+		formatString: 0
+		lineageTag: 6794deda-11a6-4594-b20e-cb8fd3c5986f
+		summarizeBy: sum
+		sourceColumn: discount
+
+		annotation SummarizationSetBy = Automatic
+
+	column country
+		dataType: string
+		lineageTag: b9880460-e4a7-42f4-8498-995697953f49
+		summarizeBy: none
+		sourceColumn: country
+
+		annotation SummarizationSetBy = Automatic
+
+	column inventory_change
+		dataType: int64
+		formatString: 0
+		lineageTag: f369c332-890d-41ba-89f6-0cbbbab54339
+		summarizeBy: sum
+		sourceColumn: inventory_change
+
+		annotation SummarizationSetBy = Automatic
+
+	column Brand_type_
+		dataType: string
+		lineageTag: 6501f234-3c6b-4843-aeec-807d3a84d502
+		summarizeBy: none
+		sourceColumn: Brand_type_
+
+		annotation SummarizationSetBy = Automatic
+
+	column category
+		dataType: string
+		lineageTag: 1bea9e02-695a-4390-baa6-6b756fc8f28b
+		summarizeBy: none
+		sourceColumn: category
+
+		annotation SummarizationSetBy = Automatic
+
+	column sub_category
+		dataType: string
+		lineageTag: 9ec1fe07-ff30-4176-9643-17e9c8be4cb8
+		summarizeBy: none
+		sourceColumn: sub_category
+
+		annotation SummarizationSetBy = Automatic
+
+	column store_id
+		dataType: string
+		lineageTag: c27595ae-b803-4a22-a03c-268666aafa95
+		summarizeBy: none
+		sourceColumn: store_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column brand
+		dataType: string
+		lineageTag: db259139-c387-48ec-b0ad-0adb7ce1d7f0
+		summarizeBy: none
+		sourceColumn: brand
+
+		annotation SummarizationSetBy = Automatic
+
+	column title
+		dataType: string
+		lineageTag: 15268637-9010-4db4-858f-7c9d168373d6
+		summarizeBy: none
+		sourceColumn: title
+
+		annotation SummarizationSetBy = Automatic
+
+	column sku
+		dataType: string
+		lineageTag: 6a5f18d9-c330-4c7a-94ef-5e2a95915a69
+		summarizeBy: none
+		sourceColumn: sku
+
+		annotation SummarizationSetBy = Automatic
+
+	column sku_unit
+		dataType: string
+		lineageTag: 3bda185d-2b77-464b-8725-046c3f22a6be
+		summarizeBy: none
+		sourceColumn: sku_unit
+
+		annotation SummarizationSetBy = Automatic
+
+	column availability
+		dataType: string
+		lineageTag: 40259ffd-cb9d-4875-98f7-0bf9850bea9e
+		summarizeBy: none
+		sourceColumn: availability
+
+		annotation SummarizationSetBy = Automatic
+
+	column Product = CONCATENATE(Book1[title],CONCATENATE(Book1[sku],Book1[sku_unit]))
+		lineageTag: 54d2e0b7-d2a8-4efa-96c4-a430020bd5bd
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column Pk = CONCATENATE(Book1[customer],CONCATENATE(Book1[product_code],Book1[store_city]))
+		lineageTag: 67e146ae-a322-4a63-b22a-ba7585e8fcc2
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column store_city
+		dataType: string
+		lineageTag: f80a47da-39b1-4399-a61c-48d20b37b5af
+		dataCategory: City
+		summarizeBy: none
+		sourceColumn: store_city
+
+		annotation SummarizationSetBy = Automatic
+
+	column abs_discount = Book1[discount] / 100
+		lineageTag: cb04094f-93f5-406c-8ac5-060b63edb513
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'city & Country' = CONCATENATE(Book1[store_city] , CONCATENATE(" , ", Book1[country]))
+		lineageTag: 3842dcbc-e0d6-421f-95fa-6da93cb037ab
+		dataCategory: Place
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column revenue = Book1[mrp] * Book1[inventory_change]
+		dataType: int64
+		formatString: 0
+		lineageTag: f32bc195-b987-40eb-928b-69bd76791549
+		summarizeBy: sum
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+	column Oem_code
+		dataType: string
+		lineageTag: 4851ecf7-1653-493d-b60c-b1e0016c0f02
+		summarizeBy: none
+		sourceColumn: Oem_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column Oem_code_group_
+		dataType: string
+		lineageTag: 1c3bcc44-538c-4a41-9146-7d9d0c8724f8
+		summarizeBy: none
+		sourceColumn: Oem_code_group_
+
+		annotation SummarizationSetBy = Automatic
+
+	column mrp
+		dataType: int64
+		formatString: 0
+		lineageTag: 8f21f4cb-4d7f-4d25-8ddf-f6288a4b3bd4
+		summarizeBy: sum
+		sourceColumn: mrp
+
+		annotation SummarizationSetBy = Automatic
+
+	column variant
+		dataType: string
+		lineageTag: aba21d05-58a5-4a7c-ae4d-85ec7ea1a38e
+		summarizeBy: none
+		sourceColumn: variant
+
+		annotation SummarizationSetBy = Automatic
+
+	column pk_mapping = CONCATENATE(Book1[category],Book1[sub_category])
+		lineageTag: 101442a2-7a33-42d2-b24c-55d6b5b105de
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'MAPPING CATEGORY' = LOOKUPVALUE(Category[Category],Category[pk_mapping],Book1[pk_mapping],"NOT MAPPED")
+		lineageTag: 17aa534f-22c1-49c9-9140-a95de154342d
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'MAPPING SUB CATEGORY' = LOOKUPVALUE(Category[display_sub_category],Category[pk_mapping],Book1[pk_mapping],"NOT MAPPED")
+		lineageTag: fb118b64-709c-4712-a3a3-185b389afde4
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column inventory_count
+		dataType: string
+		lineageTag: 1a131455-4c57-40b3-b340-65b013edfba2
+		summarizeBy: none
+		sourceColumn: inventory_count
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Book1 = m
+		mode: import
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"92f313e2-f02b-4cbf-bc2f-a852b309b5f8" = Workspaces{[workspaceId="1d634736-1220-48c2-815a-fb1a4c059800"]}[Data],
+				    #"6d0bd24d-260f-4ff0-801b-ba2841ebd2bc" = #"92f313e2-f02b-4cbf-bc2f-a852b309b5f8"{[dataflowId="3d31fc5b-1ea5-444a-9343-fe357e303b52"]}[Data],
+				    output_realtime_market_share_tool_table_ = #"6d0bd24d-260f-4ff0-801b-ba2841ebd2bc"{[entity="real_time_market_share",version=""]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(output_realtime_market_share_tool_table_,{{"inventory_change", Int64.Type}, {"asp", Int64.Type}}),
+				    #"Replaced Value1" = Table.ReplaceValue(#"Changed Type","%","",Replacer.ReplaceText,{"discount"}),
+				    #"Filtered Rows" = Table.SelectRows(#"Replaced Value1", each Text.StartsWith([customer], "Pep-")),
+				    #"Renamed Columns" = Table.RenameColumns(#"Filtered Rows",{{"param_2", "Oem_code_group_"}, {"param_1", "Oem_code"}, {"brand_type", "Brand_type_"}}),
+				    #"Changed Type1" = Table.TransformColumnTypes(#"Renamed Columns",{{"discount", Int64.Type}, {"mrp", Int64.Type}})
+				in
+				    #"Changed Type1"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

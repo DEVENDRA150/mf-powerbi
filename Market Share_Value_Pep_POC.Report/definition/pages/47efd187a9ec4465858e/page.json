@@ -1,0 +1,265 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.0.0/schema.json",
+  "name": "47efd187a9ec4465858e",
+  "displayName": "SKU Scorecard",
+  "displayOption": "FitToWidth",
+  "height": 1100,
+  "width": 1280,
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "4fc92e5cb13d5380789f",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Book1"
+              }
+            },
+            "Property": "Product"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "Drillthrough"
+      },
+      {
+        "name": "d24cad4a72c015f81ddb",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Book1"
+              }
+            },
+            "Property": "city & Country"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "Drillthrough"
+      },
+      {
+        "name": "60836987c5cd5791c59e",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Book1"
+              }
+            },
+            "Property": "Oem_code_group_"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "Drillthrough"
+      },
+      {
+        "name": "b813c370407a7a94eda4",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Book1"
+              }
+            },
+            "Property": "store_city"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "Drillthrough"
+      },
+      {
+        "name": "8826830d2720b6e72654",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Book1"
+              }
+            },
+            "Property": "category"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "Drillthrough"
+      },
+      {
+        "name": "89d319619570ee750e62",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Book1"
+              }
+            },
+            "Property": "store_city"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "Drillthrough"
+      },
+      {
+        "name": "56c9e1978920bbb7a058",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "City Order"
+              }
+            },
+            "Property": "store_city"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "Drillthrough"
+      }
+    ]
+  },
+  "pageBinding": {
+    "name": "22f3f789d38b5a9415bb",
+    "type": "Drillthrough",
+    "parameters": [
+      {
+        "name": "9b13a274cd48fa4dacfd",
+        "boundFilter": "4fc92e5cb13d5380789f",
+        "fieldExpr": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Book1"
+              }
+            },
+            "Property": "Product"
+          }
+        }
+      },
+      {
+        "name": "985f459950a9488d0acc",
+        "boundFilter": "d24cad4a72c015f81ddb",
+        "fieldExpr": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Book1"
+              }
+            },
+            "Property": "city & Country"
+          }
+        }
+      },
+      {
+        "name": "276021ebebd83b24c78f",
+        "boundFilter": "60836987c5cd5791c59e",
+        "fieldExpr": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Book1"
+              }
+            },
+            "Property": "Oem_code_group_"
+          }
+        }
+      },
+      {
+        "name": "038af04a841680e3b582",
+        "boundFilter": "b813c370407a7a94eda4",
+        "fieldExpr": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Book1"
+              }
+            },
+            "Property": "store_city"
+          }
+        }
+      },
+      {
+        "name": "30e441f929002571da49",
+        "boundFilter": "8826830d2720b6e72654",
+        "fieldExpr": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Book1"
+              }
+            },
+            "Property": "category"
+          }
+        }
+      },
+      {
+        "name": "3d9e4c7d7c29e9c803a8",
+        "boundFilter": "89d319619570ee750e62",
+        "fieldExpr": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Book1"
+              }
+            },
+            "Property": "store_city"
+          }
+        }
+      },
+      {
+        "name": "6f9932c9b92b6b440309",
+        "boundFilter": "56c9e1978920bbb7a058",
+        "fieldExpr": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "City Order"
+              }
+            },
+            "Property": "store_city"
+          }
+        }
+      }
+    ]
+  },
+  "objects": {
+    "background": [
+      {
+        "properties": {
+          "color": {
+            "solid": {
+              "color": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'#F7FFFD'"
+                  }
+                }
+              }
+            }
+          },
+          "transparency": {
+            "expr": {
+              "Literal": {
+                "Value": "0D"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "outspace": [
+      {
+        "properties": {
+          "color": {
+            "solid": {
+              "color": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'#97CAC2'"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "type": "Drillthrough"
+}

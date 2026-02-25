@@ -1,0 +1,107 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.0.0/schema.json",
+  "name": "4629aacce2c7952ff500",
+  "displayName": "Home",
+  "displayOption": "FitToWidth",
+  "height": 720,
+  "width": 1280,
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "649d2d103e046d383780",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Book1"
+              }
+            },
+            "Property": "category"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "Drillthrough"
+      }
+    ]
+  },
+  "pageBinding": {
+    "name": "c4e2b531a61d33cd39c2",
+    "type": "Drillthrough",
+    "parameters": [
+      {
+        "name": "4cfb5f4ad64a3171650a",
+        "boundFilter": "649d2d103e046d383780",
+        "fieldExpr": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Book1"
+              }
+            },
+            "Property": "category"
+          }
+        }
+      }
+    ]
+  },
+  "objects": {
+    "background": [
+      {
+        "properties": {
+          "color": {
+            "solid": {
+              "color": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'#F7FFFD'"
+                  }
+                }
+              }
+            }
+          },
+          "transparency": {
+            "expr": {
+              "Literal": {
+                "Value": "0D"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "outspace": [
+      {
+        "properties": {
+          "color": {
+            "solid": {
+              "color": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'#97CAC2'"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "visualInteractions": [
+    {
+      "source": "dc101868e0b8eba3ea02",
+      "target": "0e1608cb9da2d8052a54",
+      "type": "DataFilter"
+    },
+    {
+      "source": "6a0eb96782cec5cd6d09",
+      "target": "0e1608cb9da2d8052a54",
+      "type": "DataFilter"
+    },
+    {
+      "source": "f2a387fc220c60a768ad",
+      "target": "0e1608cb9da2d8052a54",
+      "type": "DataFilter"
+    }
+  ]
+}

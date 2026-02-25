@@ -1,0 +1,61 @@
+relationship d0d3cd9c-e777-0837-0447-34b68447e5b3
+	fromColumn: Book1.store_id
+	toColumn: 'Store id-mappping'.store_id
+
+relationship a460f40c-f47a-a064-2bc5-b09f938dff64
+	fromColumn: Book1.store_city
+	toColumn: 'City Order'.store_city
+
+relationship 58a3fcb0-c0e6-079b-a75d-04cdca741dec
+	crossFilteringBehavior: bothDirections
+	fromColumn: Book1.Pk
+	toColumn: 'Primary key sos_ms'.sos_pk
+
+relationship 0e1ca5eb-d86f-67f0-ca86-acda2384bccd
+	fromColumn: Book1.pk_mapping
+	toColumn: Category.pk_mapping
+
+relationship 2fcbb6dd-9c78-f144-8382-af21c8f3c349
+	fromColumn: 'SOS -ITC'.weighted_PK
+	toColumn: SOS-Weights.weight_pk
+
+relationship 283ca191-af94-f220-b57b-f783867a4db0
+	fromColumn: Book1.brand
+	toColumn: 'Brand order'.brand
+
+relationship 7b3d5ff5-da34-abef-0e98-dfad68bac59c
+	fromColumn: Book1.backend_inserted_date
+	toColumn: Calendar.Date
+
+relationship 0e303113-1c2f-6734-71aa-987b6478329d
+	fromColumn: 'SOS -ITC'.backend_inserted_date
+	toColumn: Calendar.Date
+
+relationship 9a975803-5c12-4023-a031-49d41572ee4d
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Calendar1.Date
+	toColumn: LocalDateTable_f7e29499-1d9e-44e1-8697-86d9e190e091.Date
+
+relationship 072658f0-0dc6-3de1-fe3d-11d96d8c0372
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: Calendar.Date
+	toColumn: Calendar1.Date
+
+relationship 952a9aa8-c7ee-41b1-bdad-06b1e954508d
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Calendar2.Date
+	toColumn: LocalDateTable_66d52a0a-3ab5-4bae-a786-a214993dfa9f.Date
+
+relationship fb2942e4-9207-370d-08af-e4e5ae9c7eb0
+	fromColumn: Book1.platform
+	toColumn: 'platform order'.platform
+
+relationship 2a44edea-d951-7157-dd82-e651fc6d6d09
+	fromColumn: 'SOS -ITC'.platform
+	toColumn: 'platform order'.platform
+
+relationship 96b5e143-2208-6d67-39a4-bbcd9d6285b5
+	fromColumn: Book1.sub_category
+	toColumn: 'sub category order'.sub_category
+

@@ -1,0 +1,40 @@
+table Calendar
+	lineageTag: c6079bf2-51a3-4980-b373-8b3f7a5e1c4d
+
+	column Date
+		formatString: dd-mmm-yyyy
+		lineageTag: 27d82f0b-149a-49cb-b238-463a50e73500
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Date]
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isCustom":true}
+
+	column month = MONTH(Calendar[Date])
+		formatString: 0
+		lineageTag: c60171c0-1e18-46fc-b4bb-d16b7db80ec1
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column day = IF('Calendar'[Date]=MAX('Calendar'[Date]),"Max Day",IF('Calendar'[Date]=MAX('Calendar'[Date])-1,"Yesterday", "Older Day"))
+		lineageTag: a5336d30-d948-4e12-8c78-198802d862a7
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column Day__ = WEEKDAY(DAY('Calendar'[Date]),1)
+		formatString: 0
+		lineageTag: d1a070db-b79b-47fb-9b0d-dbb995b8e5d5
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Calendar = calculated
+		mode: import
+		source = CALENDAR(MIN(Book1[backend_inserted_date]),MAX(Book1[backend_inserted_date]))
+
+	annotation PBI_Id = 1fc15904587749c48bd192696db8adea
+

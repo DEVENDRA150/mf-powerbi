@@ -1,0 +1,2326 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/bookmark/1.4.0/schema.json",
+  "displayName": "SOS-MSA-OFF",
+  "name": "ff28ca300c4083a7292e",
+  "options": {
+    "applyOnlyToTargetVisuals": true,
+    "targetVisualNames": [
+      "1d3fe330cc3cbc5ecb68",
+      "548468b358091c00013a",
+      "0a9ab647483c44a04ad5",
+      "f64b3189d904b8d0e00c"
+    ],
+    "suppressData": true
+  },
+  "explorationState": {
+    "version": "1.3",
+    "activeSection": "b5e0741e7296beb52af3",
+    "filters": {
+      "byName": {
+        "759912aa0dc32bcc537b": {
+          "name": "759912aa0dc32bcc537b",
+          "type": "Categorical",
+          "expression": {
+            "Column": {
+              "Expression": {
+                "SourceRef": {
+                  "Entity": "Book1"
+                }
+              },
+              "Property": "store_city"
+            }
+          },
+          "howCreated": 1
+        }
+      }
+    },
+    "sections": {
+      "b5e0741e7296beb52af3": {
+        "visualContainers": {
+          "f64b3189d904b8d0e00c": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "2d8865663a70822b15ac",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "SOS -ITC"
+                        }
+                      },
+                      "Property": "city"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "50b0c1244e3bde9ca2b9",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "SOS -ITC"
+                        }
+                      },
+                      "Property": "rank change"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "6831c8bfa2e5ed8e6d68",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "SOS -ITC"
+                        }
+                      },
+                      "Property": "Weighted SOS Change"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "f6d7fe242dba6194e70a",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "SOS -ITC"
+                        }
+                      },
+                      "Property": "Spon rank Change"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "f3bb4b3559751808b761",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "SOS -ITC"
+                        }
+                      },
+                      "Property": "Organic rank Change"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "tableEx",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 1,
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "SOS -ITC"
+                        }
+                      },
+                      "Property": "city"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "97a6e62a196950504ba5": {
+            "singleVisual": {
+              "visualType": "shape",
+              "objects": {}
+            }
+          },
+          "d86700e1de65dc32ce51": {
+            "singleVisual": {
+              "visualType": "textbox",
+              "objects": {}
+            }
+          },
+          "4e0bd9076453290da8c2": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "298ca8d755acbff3e15e",
+                  "type": "Categorical",
+                  "filter": {
+                    "Version": 2,
+                    "From": [
+                      {
+                        "Name": "b",
+                        "Entity": "Book1",
+                        "Type": 0
+                      }
+                    ],
+                    "Where": [
+                      {
+                        "Condition": {
+                          "In": {
+                            "Expressions": [
+                              {
+                                "Column": {
+                                  "Expression": {
+                                    "SourceRef": {
+                                      "Source": "b"
+                                    }
+                                  },
+                                  "Property": "Brand_type_"
+                                }
+                              }
+                            ],
+                            "Values": [
+                              [
+                                {
+                                  "Literal": {
+                                    "Value": "'Own'"
+                                  }
+                                }
+                              ]
+                            ]
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Book1"
+                        }
+                      },
+                      "Property": "Brand_type_"
+                    }
+                  },
+                  "howCreated": 1
+                },
+                {
+                  "name": "883a715d7bcbb00069a2",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "market_share_last_30 days"
+                        }
+                      },
+                      "Property": "Share 30days %"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "card",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "market_share_last_30 days"
+                        }
+                      },
+                      "Property": "Share 30days %"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "eceb42b002eedc7d870c": {
+            "filters": {
+              "byName": {
+                "298ca8d755acbff3e15e": {
+                  "name": "298ca8d755acbff3e15e",
+                  "type": "Categorical",
+                  "filter": {
+                    "Version": 2,
+                    "From": [
+                      {
+                        "Name": "b",
+                        "Entity": "Book1",
+                        "Type": 0
+                      }
+                    ],
+                    "Where": [
+                      {
+                        "Condition": {
+                          "In": {
+                            "Expressions": [
+                              {
+                                "Column": {
+                                  "Expression": {
+                                    "SourceRef": {
+                                      "Source": "b"
+                                    }
+                                  },
+                                  "Property": "Brand_type_"
+                                }
+                              }
+                            ],
+                            "Values": [
+                              [
+                                {
+                                  "Literal": {
+                                    "Value": "'Own'"
+                                  }
+                                }
+                              ]
+                            ]
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Book1"
+                        }
+                      },
+                      "Property": "Brand_type_"
+                    }
+                  },
+                  "howCreated": 1
+                }
+              },
+              "byExpr": [
+                {
+                  "name": "86b412335cdebd6a860d",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "marketshare"
+                        }
+                      },
+                      "Property": "Share%_Latest"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "card",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "marketshare"
+                        }
+                      },
+                      "Property": "Share%_Latest"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "4a0cc0b7e029a70b0057": {
+            "filters": {
+              "byName": {
+                "15332b3694a2213837d2": {
+                  "name": "15332b3694a2213837d2",
+                  "type": "Categorical",
+                  "filter": {
+                    "Version": 2,
+                    "From": [
+                      {
+                        "Name": "b",
+                        "Entity": "Book1",
+                        "Type": 0
+                      }
+                    ],
+                    "Where": [
+                      {
+                        "Condition": {
+                          "In": {
+                            "Expressions": [
+                              {
+                                "Column": {
+                                  "Expression": {
+                                    "SourceRef": {
+                                      "Source": "b"
+                                    }
+                                  },
+                                  "Property": "Brand_type_"
+                                }
+                              }
+                            ],
+                            "Values": [
+                              [
+                                {
+                                  "Literal": {
+                                    "Value": "'Own'"
+                                  }
+                                }
+                              ]
+                            ]
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Book1"
+                        }
+                      },
+                      "Property": "Brand_type_"
+                    }
+                  },
+                  "howCreated": 1
+                }
+              },
+              "byExpr": [
+                {
+                  "name": "5b866f9fdc614aa07b59",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "marketshare"
+                        }
+                      },
+                      "Property": "DOD_Change_share_%"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "card",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "marketshare"
+                        }
+                      },
+                      "Property": "DOD_Change_share_%"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "cd7ba82dc1a6c526abde": {
+            "singleVisual": {
+              "visualType": "image",
+              "objects": {}
+            }
+          },
+          "af7c4db4ec14a68b4501": {
+            "filters": {
+              "byName": {
+                "85aa7bedc0e903e3a6c2": {
+                  "name": "85aa7bedc0e903e3a6c2",
+                  "type": "Categorical",
+                  "filter": {
+                    "Version": 2,
+                    "From": [
+                      {
+                        "Name": "c",
+                        "Entity": "Category",
+                        "Type": 0
+                      }
+                    ],
+                    "Where": [
+                      {
+                        "Condition": {
+                          "Not": {
+                            "Expression": {
+                              "In": {
+                                "Expressions": [
+                                  {
+                                    "Column": {
+                                      "Expression": {
+                                        "SourceRef": {
+                                          "Source": "c"
+                                        }
+                                      },
+                                      "Property": "Category"
+                                    }
+                                  }
+                                ],
+                                "Values": [
+                                  [
+                                    {
+                                      "Literal": {
+                                        "Value": "null"
+                                      }
+                                    }
+                                  ]
+                                ]
+                              }
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Category"
+                        }
+                      },
+                      "Property": "Category"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              },
+              "byExpr": [
+                {
+                  "name": "14d11fbbab3070a83a80",
+                  "type": "Advanced",
+                  "filter": {
+                    "Version": 2,
+                    "From": [
+                      {
+                        "Name": " ",
+                        "Entity": "0.0.  Measures",
+                        "Type": 0
+                      }
+                    ],
+                    "Where": [
+                      {
+                        "Condition": {
+                          "Comparison": {
+                            "ComparisonKind": 1,
+                            "Left": {
+                              "Measure": {
+                                "Expression": {
+                                  "SourceRef": {
+                                    "Source": " "
+                                  }
+                                },
+                                "Property": "Countrows"
+                              }
+                            },
+                            "Right": {
+                              "Literal": {
+                                "Value": "0L"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "0.0.  Measures"
+                        }
+                      },
+                      "Property": "Countrows"
+                    }
+                  },
+                  "howCreated": 1
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {
+                "merge": {
+                  "data": [
+                    {
+                      "properties": {
+                        "mode": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "'Dropdown'"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "selection": [
+                    {
+                      "properties": {
+                        "strictSingleSelect": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "false"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "activeProjections": {
+                "Values": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Category"
+                        }
+                      },
+                      "Property": "Category"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "06fa2154e87ad3e104b7": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "0966646e1b6d42009454",
+                  "type": "Advanced",
+                  "filter": {
+                    "Version": 2,
+                    "From": [
+                      {
+                        "Name": " ",
+                        "Entity": "0.0.  Measures",
+                        "Type": 0
+                      }
+                    ],
+                    "Where": [
+                      {
+                        "Condition": {
+                          "Comparison": {
+                            "ComparisonKind": 1,
+                            "Left": {
+                              "Measure": {
+                                "Expression": {
+                                  "SourceRef": {
+                                    "Source": " "
+                                  }
+                                },
+                                "Property": "Countrows"
+                              }
+                            },
+                            "Right": {
+                              "Literal": {
+                                "Value": "0L"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "0.0.  Measures"
+                        }
+                      },
+                      "Property": "Countrows"
+                    }
+                  },
+                  "howCreated": 1
+                },
+                {
+                  "name": "b008335b7d2da6d40069",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "sub category order"
+                        }
+                      },
+                      "Property": "sub_category"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {
+                "merge": {
+                  "data": [
+                    {
+                      "properties": {
+                        "mode": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "'Dropdown'"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "selection": [
+                    {
+                      "properties": {
+                        "strictSingleSelect": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "false"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "activeProjections": {
+                "Values": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "sub category order"
+                        }
+                      },
+                      "Property": "sub_category"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "bd564811b8a43122d0e0": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "2b6ee4cec368a6775690",
+                  "type": "Advanced",
+                  "filter": {
+                    "Version": 2,
+                    "From": [
+                      {
+                        "Name": " ",
+                        "Entity": "0.0.  Measures",
+                        "Type": 0
+                      }
+                    ],
+                    "Where": [
+                      {
+                        "Condition": {
+                          "Comparison": {
+                            "ComparisonKind": 1,
+                            "Left": {
+                              "Measure": {
+                                "Expression": {
+                                  "SourceRef": {
+                                    "Source": " "
+                                  }
+                                },
+                                "Property": "Countrows"
+                              }
+                            },
+                            "Right": {
+                              "Literal": {
+                                "Value": "0L"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "0.0.  Measures"
+                        }
+                      },
+                      "Property": "Countrows"
+                    }
+                  },
+                  "howCreated": 1
+                },
+                {
+                  "name": "fc1e62d10406d6452139",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "platform order"
+                        }
+                      },
+                      "Property": "platform"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "afedb442de11d6d51784",
+                  "type": "Advanced",
+                  "filter": {
+                    "Version": 2,
+                    "From": [
+                      {
+                        "Name": " ",
+                        "Entity": "0.0.  Measures",
+                        "Type": 0
+                      }
+                    ],
+                    "Where": [
+                      {
+                        "Condition": {
+                          "Comparison": {
+                            "ComparisonKind": 1,
+                            "Left": {
+                              "Measure": {
+                                "Expression": {
+                                  "SourceRef": {
+                                    "Source": " "
+                                  }
+                                },
+                                "Property": "Countrows"
+                              }
+                            },
+                            "Right": {
+                              "Literal": {
+                                "Value": "0L"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "0.0.  Measures"
+                        }
+                      },
+                      "Property": "Countrows"
+                    }
+                  },
+                  "howCreated": 1
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {
+                "merge": {
+                  "data": [
+                    {
+                      "properties": {
+                        "mode": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "'Dropdown'"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "selection": [
+                    {
+                      "properties": {
+                        "strictSingleSelect": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "false"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "activeProjections": {
+                "Values": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "platform order"
+                        }
+                      },
+                      "Property": "platform"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "82d83d934bd64d63b413": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "objects": {}
+            }
+          },
+          "b0d9513abc460de968c3": {
+            "filters": {
+              "byName": {
+                "742e48c5117cd6803606": {
+                  "name": "742e48c5117cd6803606",
+                  "type": "Categorical",
+                  "filter": {
+                    "Version": 2,
+                    "From": [
+                      {
+                        "Name": "b",
+                        "Entity": "Book1",
+                        "Type": 0
+                      }
+                    ],
+                    "Where": [
+                      {
+                        "Condition": {
+                          "In": {
+                            "Expressions": [
+                              {
+                                "Column": {
+                                  "Expression": {
+                                    "SourceRef": {
+                                      "Source": "b"
+                                    }
+                                  },
+                                  "Property": "Brand_type_"
+                                }
+                              }
+                            ],
+                            "Values": [
+                              [
+                                {
+                                  "Literal": {
+                                    "Value": "'Own'"
+                                  }
+                                }
+                              ]
+                            ]
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Book1"
+                        }
+                      },
+                      "Property": "Brand_type_"
+                    }
+                  },
+                  "howCreated": 1
+                }
+              },
+              "byExpr": [
+                {
+                  "name": "ec0d385001e12808b243",
+                  "type": "TopN",
+                  "filter": {
+                    "Version": 2,
+                    "From": [
+                      {
+                        "Name": "subquery",
+                        "Expression": {
+                          "Subquery": {
+                            "Query": {
+                              "Version": 2,
+                              "From": [
+                                {
+                                  "Name": "b",
+                                  "Entity": "Book1",
+                                  "Type": 0
+                                },
+                                {
+                                  "Name": "s",
+                                  "Entity": "sales loss measures",
+                                  "Type": 0
+                                }
+                              ],
+                              "Select": [
+                                {
+                                  "Column": {
+                                    "Expression": {
+                                      "SourceRef": {
+                                        "Source": "b"
+                                      }
+                                    },
+                                    "Property": "Product"
+                                  },
+                                  "Name": "field"
+                                }
+                              ],
+                              "OrderBy": [
+                                {
+                                  "Direction": 2,
+                                  "Expression": {
+                                    "Measure": {
+                                      "Expression": {
+                                        "SourceRef": {
+                                          "Source": "s"
+                                        }
+                                      },
+                                      "Property": "PSL_output_final"
+                                    }
+                                  }
+                                }
+                              ],
+                              "Top": 5
+                            }
+                          }
+                        },
+                        "Type": 2
+                      },
+                      {
+                        "Name": "b",
+                        "Entity": "Book1",
+                        "Type": 0
+                      }
+                    ],
+                    "Where": [
+                      {
+                        "Condition": {
+                          "In": {
+                            "Expressions": [
+                              {
+                                "Column": {
+                                  "Expression": {
+                                    "SourceRef": {
+                                      "Source": "b"
+                                    }
+                                  },
+                                  "Property": "Product"
+                                }
+                              }
+                            ],
+                            "Table": {
+                              "SourceRef": {
+                                "Source": "subquery"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Book1"
+                        }
+                      },
+                      "Property": "Product"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "7f19e8f2294479185793",
+                  "type": "Advanced",
+                  "filter": {
+                    "Version": 2,
+                    "From": [
+                      {
+                        "Name": "s",
+                        "Entity": "sales loss measures",
+                        "Type": 0
+                      }
+                    ],
+                    "Where": [
+                      {
+                        "Condition": {
+                          "Comparison": {
+                            "ComparisonKind": 4,
+                            "Left": {
+                              "Measure": {
+                                "Expression": {
+                                  "SourceRef": {
+                                    "Source": "s"
+                                  }
+                                },
+                                "Property": "PSL_output_final"
+                              }
+                            },
+                            "Right": {
+                              "Literal": {
+                                "Value": "0L"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "sales loss measures"
+                        }
+                      },
+                      "Property": "PSL_output_final"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "tableEx",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "sales loss measures"
+                        }
+                      },
+                      "Property": "PSL_output_final"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "92eaf06601401d2e2320": {
+            "singleVisual": {
+              "visualType": "shape",
+              "objects": {}
+            }
+          },
+          "369b54e981b1adb7136d": {
+            "filters": {
+              "byName": {
+                "742e48c5117cd6803606": {
+                  "name": "742e48c5117cd6803606",
+                  "type": "Categorical",
+                  "filter": {
+                    "Version": 2,
+                    "From": [
+                      {
+                        "Name": "b",
+                        "Entity": "Book1",
+                        "Type": 0
+                      }
+                    ],
+                    "Where": [
+                      {
+                        "Condition": {
+                          "In": {
+                            "Expressions": [
+                              {
+                                "Column": {
+                                  "Expression": {
+                                    "SourceRef": {
+                                      "Source": "b"
+                                    }
+                                  },
+                                  "Property": "Brand_type_"
+                                }
+                              }
+                            ],
+                            "Values": [
+                              [
+                                {
+                                  "Literal": {
+                                    "Value": "'Own'"
+                                  }
+                                }
+                              ]
+                            ]
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Book1"
+                        }
+                      },
+                      "Property": "Brand_type_"
+                    }
+                  },
+                  "howCreated": 1
+                }
+              },
+              "byExpr": [
+                {
+                  "name": "f22e00d4201d7b2c0641",
+                  "type": "TopN",
+                  "filter": {
+                    "Version": 2,
+                    "From": [
+                      {
+                        "Name": "subquery",
+                        "Expression": {
+                          "Subquery": {
+                            "Query": {
+                              "Version": 2,
+                              "From": [
+                                {
+                                  "Name": "b",
+                                  "Entity": "Book1",
+                                  "Type": 0
+                                },
+                                {
+                                  "Name": "s",
+                                  "Entity": "sales loss measures",
+                                  "Type": 0
+                                }
+                              ],
+                              "Select": [
+                                {
+                                  "Column": {
+                                    "Expression": {
+                                      "SourceRef": {
+                                        "Source": "b"
+                                      }
+                                    },
+                                    "Property": "Product"
+                                  },
+                                  "Name": "field"
+                                }
+                              ],
+                              "OrderBy": [
+                                {
+                                  "Direction": 2,
+                                  "Expression": {
+                                    "Measure": {
+                                      "Expression": {
+                                        "SourceRef": {
+                                          "Source": "s"
+                                        }
+                                      },
+                                      "Property": "PSG_Own"
+                                    }
+                                  }
+                                }
+                              ],
+                              "Top": 5
+                            }
+                          }
+                        },
+                        "Type": 2
+                      },
+                      {
+                        "Name": "b",
+                        "Entity": "Book1",
+                        "Type": 0
+                      }
+                    ],
+                    "Where": [
+                      {
+                        "Condition": {
+                          "In": {
+                            "Expressions": [
+                              {
+                                "Column": {
+                                  "Expression": {
+                                    "SourceRef": {
+                                      "Source": "b"
+                                    }
+                                  },
+                                  "Property": "Product"
+                                }
+                              }
+                            ],
+                            "Table": {
+                              "SourceRef": {
+                                "Source": "subquery"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Book1"
+                        }
+                      },
+                      "Property": "Product"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "bf1fefc028e5232c6e2b",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "sales loss measures"
+                        }
+                      },
+                      "Property": "PSG_Own"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "tableEx",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "sales loss measures"
+                        }
+                      },
+                      "Property": "PSG_Own"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "519ea63dae4eca5850bc": {
+            "singleVisual": {
+              "visualType": "textbox",
+              "objects": {}
+            }
+          },
+          "8e5577d9a10ed0c13e93": {
+            "singleVisual": {
+              "visualType": "textbox",
+              "objects": {}
+            }
+          },
+          "cd5e615d2a81d2c4178c": {
+            "filters": {
+              "byName": {
+                "5bdd959d4b011ea66ce5": {
+                  "name": "5bdd959d4b011ea66ce5",
+                  "type": "Categorical",
+                  "filter": {
+                    "Version": 2,
+                    "From": [
+                      {
+                        "Name": "b",
+                        "Entity": "Book1",
+                        "Type": 0
+                      }
+                    ],
+                    "Where": [
+                      {
+                        "Condition": {
+                          "In": {
+                            "Expressions": [
+                              {
+                                "Column": {
+                                  "Expression": {
+                                    "SourceRef": {
+                                      "Source": "b"
+                                    }
+                                  },
+                                  "Property": "Brand_type_"
+                                }
+                              }
+                            ],
+                            "Values": [
+                              [
+                                {
+                                  "Literal": {
+                                    "Value": "'Own'"
+                                  }
+                                }
+                              ]
+                            ]
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Book1"
+                        }
+                      },
+                      "Property": "Brand_type_"
+                    }
+                  },
+                  "howCreated": 1
+                }
+              },
+              "byExpr": [
+                {
+                  "name": "c67d2552b5da00d3c080",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "market_share_last_30 days"
+                        }
+                      },
+                      "Property": "Share 30days %"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "d58c69d37c8ae19ec00e",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Calendar"
+                        }
+                      },
+                      "Property": "Date"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "lineChart",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 1,
+                  "Expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Calendar"
+                        }
+                      },
+                      "Property": "Date"
+                    }
+                  }
+                }
+              ],
+              "activeProjections": {
+                "Category": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Calendar"
+                        }
+                      },
+                      "Property": "Date"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "44592443184e32ed0cb1": {
+            "singleVisual": {
+              "visualType": "shape",
+              "objects": {}
+            }
+          },
+          "6f331a16ba9b8703ed95": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "b339461fc0dc3b698c59",
+                  "type": "TopN",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Book1"
+                        }
+                      },
+                      "Property": "store_city"
+                    }
+                  },
+                  "howCreated": 1
+                },
+                {
+                  "name": "402f1acf203760bede82",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Book1"
+                        }
+                      },
+                      "Property": "city & Country"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "map",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 1,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "marketshare"
+                        }
+                      },
+                      "Property": "DOD_Change_share_%"
+                    }
+                  }
+                }
+              ],
+              "activeProjections": {
+                "Category": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Book1"
+                        }
+                      },
+                      "Property": "city & Country"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "cf41b69728bcb40d4e83": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "589a86de0b9999595ae7",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "categorywatchlist"
+                        }
+                      },
+                      "Property": "Availability_Dip_Own"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "6c16057d555c40088164",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "categorywatchlist"
+                        }
+                      },
+                      "Property": "Discount_Dip_Comp"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "f30ddc1b843e380ee107",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "categorywatchlist"
+                        }
+                      },
+                      "Property": "Availability_Dip_Comp"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "28e2324e7505704d7e30",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "categorywatchlist"
+                        }
+                      },
+                      "Property": "Discount_Dip_Own"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "e84d2bb310da73b88e20",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Book1"
+                        }
+                      },
+                      "Property": "store_city"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "dee7513b9bc03c5a9e3a",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "OEM Level Measures"
+                        }
+                      },
+                      "Property": "Share_OEM_Group"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "1964788bdb13c23c1665",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "sales loss measures"
+                        }
+                      },
+                      "Property": "Change_vs_avg"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "105d9a3a2c5b72783b0a",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "sales loss measures"
+                        }
+                      },
+                      "Property": "Category_Size"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "7938b0bb736099cb855d",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "sales loss measures"
+                        }
+                      },
+                      "Property": "PSL_output_final"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "41fa381650d007774e62",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "marketshare"
+                        }
+                      },
+                      "Property": "DOD_Change_share_%"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "tableEx",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 2,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "sales loss measures"
+                        }
+                      },
+                      "Property": "Category_Size"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "17e5f1caa9b9c1170c0b": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "f853ed7ed0410a10b00e",
+                  "type": "Advanced",
+                  "filter": {
+                    "Version": 2,
+                    "From": [
+                      {
+                        "Name": " ",
+                        "Entity": "0.0.  Measures",
+                        "Type": 0
+                      }
+                    ],
+                    "Where": [
+                      {
+                        "Condition": {
+                          "Comparison": {
+                            "ComparisonKind": 1,
+                            "Left": {
+                              "Measure": {
+                                "Expression": {
+                                  "SourceRef": {
+                                    "Source": " "
+                                  }
+                                },
+                                "Property": "Countrows"
+                              }
+                            },
+                            "Right": {
+                              "Literal": {
+                                "Value": "0L"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "0.0.  Measures"
+                        }
+                      },
+                      "Property": "Countrows"
+                    }
+                  },
+                  "howCreated": 1
+                },
+                {
+                  "name": "48a41dae4e7199de60a1",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Book1"
+                        }
+                      },
+                      "Property": "store_city"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {
+                "merge": {
+                  "data": [
+                    {
+                      "properties": {
+                        "mode": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "'Dropdown'"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "selection": [
+                    {
+                      "properties": {
+                        "strictSingleSelect": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "false"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "activeProjections": {
+                "Values": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Book1"
+                        }
+                      },
+                      "Property": "store_city"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "99ef7a40146655d68d00": {
+            "singleVisual": {
+              "visualType": "shape",
+              "objects": {}
+            }
+          },
+          "a763416a08d25002b47a": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "79937a54bcc438c6b3e1",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Book1"
+                        }
+                      },
+                      "Property": "store_city"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "slicer",
+              "objects": {
+                "merge": {
+                  "data": [
+                    {
+                      "properties": {
+                        "mode": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "'Dropdown'"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ],
+                  "selection": [
+                    {
+                      "properties": {
+                        "strictSingleSelect": {
+                          "expr": {
+                            "Literal": {
+                              "Value": "false"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "activeProjections": {
+                "Values": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Book1"
+                        }
+                      },
+                      "Property": "store_city"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "2b2396c27b10ec7e4b13": {
+            "singleVisual": {
+              "visualType": "actionButton",
+              "objects": {}
+            }
+          },
+          "cba8a6605eb26d63a04e": {
+            "filters": {
+              "byExpr": [
+                {
+                  "name": "0afddd34c4eb2393387e",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Book1"
+                        }
+                      },
+                      "Property": "store_city"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "c74f008dba87d88ba6c2",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Book1"
+                        }
+                      },
+                      "Property": "platform"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "0950880d7da2a2d6b84a",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Book1"
+                        }
+                      },
+                      "Property": "sub_category"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "c7226b8639876d2a2b36",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "marketshare"
+                        }
+                      },
+                      "Property": "Avg_Share %"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "4d2bfb9ea092c401508e",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Book1"
+                        }
+                      },
+                      "Property": "Product"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "054972049b3c6e1ed313",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "OEM Level Measures"
+                        }
+                      },
+                      "Property": "Share_OEM_Group"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "c3bc9083a2c6be7a2528",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "sales loss measures"
+                        }
+                      },
+                      "Property": "Change_vs_avg"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "cb4224d1409753a1d20c",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "sales loss measures"
+                        }
+                      },
+                      "Property": "ASP_Own"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "58cd5120b131e4da5e19",
+                  "type": "Advanced",
+                  "expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "0.0.  Measures"
+                        }
+                      },
+                      "Property": "Own Availavility %"
+                    }
+                  },
+                  "howCreated": 0
+                },
+                {
+                  "name": "b4ba13a1dc5c389ed920",
+                  "type": "Categorical",
+                  "expression": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Category"
+                        }
+                      },
+                      "Property": "Category"
+                    }
+                  },
+                  "howCreated": 0
+                }
+              ]
+            },
+            "singleVisual": {
+              "visualType": "decompositionTreeVisual",
+              "objects": {},
+              "orderBy": [
+                {
+                  "Direction": 1,
+                  "Expression": {
+                    "Measure": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "marketshare"
+                        }
+                      },
+                      "Property": "Avg_Share %"
+                    }
+                  }
+                }
+              ],
+              "activeProjections": {
+                "ExplainBy": [
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Category"
+                        }
+                      },
+                      "Property": "Category"
+                    }
+                  },
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Book1"
+                        }
+                      },
+                      "Property": "platform"
+                    }
+                  },
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Book1"
+                        }
+                      },
+                      "Property": "sub_category"
+                    }
+                  },
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Book1"
+                        }
+                      },
+                      "Property": "store_city"
+                    }
+                  },
+                  {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Book1"
+                        }
+                      },
+                      "Property": "Product"
+                    }
+                  }
+                ]
+              },
+              "expansionStates": [
+                {
+                  "roles": [
+                    "ExplainBy"
+                  ],
+                  "levels": [
+                    {
+                      "queryRefs": [
+                        "Category.Category"
+                      ],
+                      "isCollapsed": true,
+                      "identityKeys": [
+                        {
+                          "Column": {
+                            "Expression": {
+                              "SourceRef": {
+                                "Entity": "Category"
+                              }
+                            },
+                            "Property": "Category"
+                          }
+                        }
+                      ],
+                      "isPinned": true
+                    },
+                    {
+                      "queryRefs": [
+                        "Book1.platform"
+                      ],
+                      "isCollapsed": true,
+                      "identityKeys": [
+                        {
+                          "Column": {
+                            "Expression": {
+                              "SourceRef": {
+                                "Entity": "Book1"
+                              }
+                            },
+                            "Property": "platform"
+                          }
+                        }
+                      ],
+                      "isPinned": true
+                    },
+                    {
+                      "queryRefs": [
+                        "Book1.sub_category"
+                      ],
+                      "isCollapsed": true,
+                      "identityKeys": [
+                        {
+                          "Column": {
+                            "Expression": {
+                              "SourceRef": {
+                                "Entity": "Book1"
+                              }
+                            },
+                            "Property": "sub_category"
+                          }
+                        }
+                      ],
+                      "isPinned": true
+                    },
+                    {
+                      "queryRefs": [
+                        "Book1.store_city"
+                      ],
+                      "isCollapsed": true,
+                      "identityKeys": [
+                        {
+                          "Column": {
+                            "Expression": {
+                              "SourceRef": {
+                                "Entity": "Book1"
+                              }
+                            },
+                            "Property": "store_city"
+                          }
+                        }
+                      ],
+                      "isPinned": true
+                    },
+                    {
+                      "queryRefs": [
+                        "Book1.Product"
+                      ],
+                      "isCollapsed": true,
+                      "isPinned": true
+                    }
+                  ],
+                  "root": {
+                    "identityValues": null,
+                    "children": [
+                      {
+                        "identityValues": [
+                          {
+                            "Literal": {
+                              "Value": "'Bakery & Biscuits'"
+                            }
+                          }
+                        ],
+                        "isToggled": true,
+                        "children": [
+                          {
+                            "identityValues": [
+                              {
+                                "Literal": {
+                                  "Value": "'blinkit_app'"
+                                }
+                              }
+                            ],
+                            "isToggled": true,
+                            "children": [
+                              {
+                                "identityValues": [
+                                  {
+                                    "Literal": {
+                                      "Value": "'Cream Biscuits'"
+                                    }
+                                  }
+                                ],
+                                "isToggled": true,
+                                "children": [
+                                  {
+                                    "identityValues": [
+                                      {
+                                        "Literal": {
+                                          "Value": "'Yamuna Nagar'"
+                                        }
+                                      }
+                                    ],
+                                    "isToggled": true
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          },
+          "548468b358091c00013a": {
+            "singleVisual": {
+              "visualType": "image",
+              "objects": {}
+            }
+          }
+        },
+        "visualContainerGroups": {
+          "0a9ab647483c44a04ad5": {
+            "isHidden": true
+          }
+        }
+      }
+    },
+    "objects": {
+      "merge": {
+        "outspacePane": [
+          {
+            "properties": {
+              "expanded": {
+                "expr": {
+                  "Literal": {
+                    "Value": "false"
+                  }
+                }
+              },
+              "visible": {
+                "expr": {
+                  "Literal": {
+                    "Value": "false"
+                  }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

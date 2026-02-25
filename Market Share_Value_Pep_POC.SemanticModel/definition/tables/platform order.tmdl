@@ -1,0 +1,32 @@
+table 'platform order'
+	lineageTag: d0d17697-98e0-41ea-b715-ca7ea49835ff
+
+	column 'Platform Clean' =
+			
+			SWITCH(
+			    'platform order'[platform],
+			    "Flipkart_Minutes_app", "Flipkart Minutes",
+			    "swiggy_instamart_app", "Swiggy Instamart",
+			    "blinkit_app", "Blinkit",
+			    "Zepto_app", "Zepto",
+			    "Others"
+			)
+		lineageTag: a3afc8f1-9040-4e8d-a744-f46833c17e2d
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column platform
+		lineageTag: 51f5114b-6fe0-4682-8dd4-99b1bd049287
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: Book1[platform]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'platform order' = calculated
+		mode: import
+		source = DISTINCT(VALUES(Book1[platform]))
+
+	annotation PBI_Id = 8f89706847114a03937544bcece3faae
+

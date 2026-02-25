@@ -1,0 +1,212 @@
+table marketshare
+	lineageTag: c0f365d1-25c6-4104-b8db-cad8e7e43583
+
+	measure Your_Units =
+			
+			CALCULATE(
+			    SUM(Book1[inventory_change]),
+			    Book1[Brand_type_] = "Own"
+			)
+		formatString: 0
+		lineageTag: 2a05184d-4b5d-4b88-8c76-e4a661b25f80
+
+	measure Market_Units =
+			
+			CALCULATE(
+			    SUM(Book1[inventory_change]),
+			    REMOVEFILTERS(Book1[Brand_type_])
+			)
+		formatString: 0
+		lineageTag: 129ab6dc-a274-4bca-ae91-ae0d44303276
+
+	measure 'Avg_Share %' = ```
+			
+			VAR numm_= CALCULATE(SUMX(Book1,Book1[inventory_change]*Book1[mrp]), Book1[Brand_type_] = "Own")
+			VAR denom= CALCULATE(SUMX(Book1,Book1[inventory_change] * Book1[mrp]),ALL(Book1[Brand_type_]))
+			
+			RETURN
+			DIVIDE(numm_,denom)
+			
+			//DIVIDE(
+			   //CALCULATE(SUM(Book1[inventory_change]), Book1[Brand_type_] = "Own"),
+			  //CALCULATE(SUM(Book1[inventory_change]), REMOVEFILTERS(Book1[Brand_type_]))
+			//)
+			
+			```
+		formatString: #,0.00%;-#,0.00%;#,0.00%
+		lineageTag: a7a00660-0079-48b5-bf47-a54801598151
+
+	measure DOD_Change_share_% =
+			
+			VAR Max_date= CALCULATE([Avg_Share %],Book1[Brand_type_]="Own",Book1[backend_inserted_date]= MAX(Book1[backend_inserted_date]))
+			
+			VAR prev_date= CALCULATE([Avg_Share %],Book1[backend_inserted_date] = MAX(Book1[backend_inserted_date])-1)
+			
+			RETURN
+			Max_date - prev_date
+			
+			
+			// VAR MaxDate =
+			//     CALCULATE(MAX('Calendar'[Date]), ALL('Calendar'))
+			// VAR PrevDate =
+			//     CALCULATE(
+			//         MAX('Calendar'[Date]),
+			//         FILTER(
+			//             ALL('Calendar'),
+			//             'Calendar'[Date] < MaxDate
+			//         )
+			//     )
+			// VAR ShareToday =
+			//     CALCULATE([Avg_Share %], 'Calendar'[Date] = MaxDate)
+			// VAR SharePrev =
+			//     CALCULATE([Avg_Share %], 'Calendar'[Date] = PrevDate)
+			// RETURN
+			//     ShareToday - SharePrev
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 0c7c2802-dd52-4203-b3f8-1f27d5dbf377
+
+	measure Monthly_Avg_Sales =
+			AVERAGEX(
+			    VALUES('Calendar'[Month]),  // Assuming you have a Calendar table with a Month column
+			    CALCULATE(SUM(Book1[inventory_change]))
+			)
+		lineageTag: 0cf80bde-b69e-4e74-be3a-293989f93bea
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Monthly_Avg_Sales_Own = ```
+			
+			CALCULATE(
+			    [Monthly_Avg_Sales],    // Use your monthly avg sales measure or sum if monthly granularity
+			    Book1[Brand_type_] = "Own"
+			)
+			
+			```
+		lineageTag: ad648fff-a27b-4cf0-a16c-82a644ae102b
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Product_Monthly_Sales_Rank_Own = ```
+			
+			RANKX(
+			    FILTER(
+			        ALL(Book1),
+			        Book1[category] = MAX(Book1[category]) &&
+			        Book1[sub_category] = MAX(Book1[sub_category]) &&
+			        Book1[store_city] = MAX(Book1[store_city]) &&
+			        Book1[Brand_type_] = "Own" &&
+			        MONTH(Book1[backend_inserted_date]) = MONTH(MAX(Book1[backend_inserted_date])) &&
+			        YEAR(Book1[backend_inserted_date]) = YEAR(MAX(Book1[backend_inserted_date]))
+			    ),
+			    [Monthly_Avg_Sales_Own],  // or [Monthly_Avg_Sales_Own]
+			    ,
+			    DESC,
+			    DENSE
+			)
+			
+			```
+		formatString: 0
+		lineageTag: 4f644107-9c0a-4807-b1fe-adf0e361f37e
+
+	measure Top5_Monthly_Marker_Own = ```
+			
+			IF([Product_Monthly_Sales_Rank_Own] <= 5, 1, 0)
+			
+			```
+		formatString: 0
+		lineageTag: a1ee3baa-ab87-444c-8189-64bf27345dcc
+
+	measure DOD_Change_%_Series = ```
+			
+			VAR SharePrev =
+			    CALCULATE(
+			        [Avg_Share %],
+			        'Calendar'[Date]=max(Book1[backend_inserted_date])
+			    )
+			RETURN
+			    ([Avg_Share %] - SharePrev)
+			
+			```
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 985cfa95-9ff7-4236-a4ef-ca9dda36bf3f
+
+	measure Share%_Latest =
+			
+			VAR numm_ =
+			    CALCULATE(SUMX(Book1,Book1[inventory_change] * 'Book1'[mrp]),Book1[Brand_type_] = "Own",Book1[backend_inserted_date] = MAX(Book1[backend_inserted_date]))
+			
+			VAR denom_ = CALCULATE(SUMX(Book1,Book1[inventory_change] * Book1[mrp]),Book1[backend_inserted_date] = MAX(Book1[backend_inserted_date]),ALL(Book1[Brand_type_]))
+			
+			RETURN
+			DIVIDE(numm_,denom_)
+			
+			//VAR MaxDate =
+			  //  CALCULATE(MAX('Calendar'[Date]), ALL('Calendar'))
+			//VAR PrevDate =
+			  //  CALCULATE(
+			    //    MAX('Calendar'[Date]),
+			      //  FILTER(
+			        //    ALL('Calendar'),
+			          //  'Calendar'[Date] < MaxDate
+			        //)
+			    //)
+			//VAR ShareToday =
+			  //  CALCULATE([Share %], 'Calendar'[Date] = MaxDate)
+			//VAR SharePrev =
+			  //  CALCULATE([Share %], 'Calendar'[Date] = PrevDate)
+			//RETURN
+			  //  ShareToday
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 59793d80-e6c5-4d35-8e45-1e8b676e8924
+
+	measure DOD_Change_Direction =
+			
+			IF([DOD_Change_share_%] < 0, "Negative", "Positive or Zero")
+		lineageTag: e1fb2ed2-e56c-4762-8bec-81aeaf631acc
+
+	measure Market_Share_%_OEM_Group = ```
+			
+			VAR CurrentOEM = SELECTEDVALUE(Book1[Oem_code])
+			VAR CurrDate = MAX('Calendar'[Date])
+			RETURN
+			DIVIDE(
+			    CALCULATE(
+			        SUM(Book1[inventory_change]),
+			        Book1[Brand_type_] = "Own",
+			        TREATAS({CurrentOEM}, Book1[Oem_code_group_]),  // Forces OEM context, ignores SKU
+			        Book1[backend_inserted_date] = CurrDate
+			    ),
+			    CALCULATE(
+			        SUM(Book1[inventory_change]),
+			        REMOVEFILTERS(Book1[Brand_type_]),
+			        TREATAS({CurrentOEM}, Book1[Oem_code_Group_]),
+			        Book1[backend_inserted_date] = CurrDate
+			    )
+			)
+			
+			```
+		lineageTag: ceb774f6-d88b-49a7-8de6-634a9587008b
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure sharechangeoveravg = [Share%_Latest] - marketshare[Avg_Share %]
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: c09bd06b-2933-401c-91cb-4edadb67ad8e
+
+	column Column
+		formatString: 0
+		lineageTag: 85612ed3-bd30-4cd1-9814-b3f74c84cc2e
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Column]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition marketshare = calculated
+		mode: import
+		source = Row("Column", BLANK())
+
+	annotation PBI_Id = 549e2168d58a42bb8cf78c0c6381ec39
+
+	annotation 436ba87b-9c83-4389-a31b-ebd06a36be98 = {"Expression":""}
+

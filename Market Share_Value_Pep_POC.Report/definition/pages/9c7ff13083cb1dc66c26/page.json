@@ -1,0 +1,91 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.0.0/schema.json",
+  "name": "9c7ff13083cb1dc66c26",
+  "displayName": "Star Products",
+  "displayOption": "FitToWidth",
+  "height": 1200,
+  "width": 1280,
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "22b5bcf641be3f5a2675",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Book1"
+              }
+            },
+            "Property": "Product"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "Drillthrough"
+      }
+    ]
+  },
+  "pageBinding": {
+    "name": "071fd76bcee59762e545",
+    "type": "Default",
+    "parameters": [
+      {
+        "name": "af4a1c71e1c4372482a3",
+        "boundFilter": "22b5bcf641be3f5a2675",
+        "fieldExpr": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Book1"
+              }
+            },
+            "Property": "Product"
+          }
+        }
+      }
+    ]
+  },
+  "objects": {
+    "background": [
+      {
+        "properties": {
+          "color": {
+            "solid": {
+              "color": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'#F7FFFD'"
+                  }
+                }
+              }
+            }
+          },
+          "transparency": {
+            "expr": {
+              "Literal": {
+                "Value": "0D"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "outspace": [
+      {
+        "properties": {
+          "color": {
+            "solid": {
+              "color": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'#97CAC2'"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "type": "Drillthrough"
+}

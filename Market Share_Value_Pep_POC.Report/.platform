@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "Market Share_Value_Pep_POC"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "92620e0e-b969-4533-9869-2fd64b393c80"
+  }
+}

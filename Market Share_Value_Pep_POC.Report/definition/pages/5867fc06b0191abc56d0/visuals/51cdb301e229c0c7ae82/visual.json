@@ -1,0 +1,172 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.4.0/schema.json",
+  "name": "51cdb301e229c0c7ae82",
+  "position": {
+    "x": 8,
+    "y": 0,
+    "z": 0,
+    "height": 120,
+    "width": 328,
+    "tabOrder": 0
+  },
+  "visual": {
+    "visualType": "multiRowCard",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "categorywatchlist"
+                    }
+                  },
+                  "Property": "Availability_Dip_Own"
+                }
+              },
+              "queryRef": "categorywatchlist.Availability_Dip_Own",
+              "nativeQueryRef": "Availability Change Own",
+              "displayName": "Availability Change Own"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "categorywatchlist"
+                    }
+                  },
+                  "Property": "Availability_Dip_Comp"
+                }
+              },
+              "queryRef": "categorywatchlist.Availability_Dip_Comp",
+              "nativeQueryRef": "Availability Change Comp.",
+              "displayName": "Availability Change Comp."
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "categorywatchlist"
+                    }
+                  },
+                  "Property": "Discount_Dip_Own"
+                }
+              },
+              "queryRef": "categorywatchlist.Discount_Dip_Own",
+              "nativeQueryRef": "Discount Change Own",
+              "displayName": "Discount Change Own"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "categorywatchlist"
+                    }
+                  },
+                  "Property": "Discount_Dip_Comp"
+                }
+              },
+              "queryRef": "categorywatchlist.Discount_Dip_Comp",
+              "nativeQueryRef": "Discount Change Comp",
+              "displayName": "Discount Change Comp"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "SOS -ITC"
+                    }
+                  },
+                  "Property": "rank change"
+                }
+              },
+              "queryRef": "SOS -ITC.rank change",
+              "nativeQueryRef": "Rank Change",
+              "displayName": "Rank Change"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "categorywatchlist"
+                  }
+                },
+                "Property": "Availability_Dip_Own"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "objects": {
+      "categoryLabels": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "8D"
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "dataLabels": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "8D"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "card": [
+        {
+          "properties": {
+            "outlineStyle": {
+              "expr": {
+                "Literal": {
+                  "Value": "15D"
+                }
+              }
+            },
+            "barShow": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

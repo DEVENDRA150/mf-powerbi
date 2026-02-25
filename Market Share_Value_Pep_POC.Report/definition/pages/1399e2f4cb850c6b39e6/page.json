@@ -1,0 +1,245 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.0.0/schema.json",
+  "name": "1399e2f4cb850c6b39e6",
+  "displayName": "City Scorecard",
+  "displayOption": "FitToWidth",
+  "height": 700,
+  "width": 1280,
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "6b84d06a96a2ca59504a",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Book1"
+              }
+            },
+            "Property": "city & Country"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "Drillthrough"
+      },
+      {
+        "name": "c8ee529ca7ae7a6e10cd",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Book1"
+              }
+            },
+            "Property": "store_city"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "Drillthrough"
+      },
+      {
+        "name": "d5f93615af3ff6d85249",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Book1"
+              }
+            },
+            "Property": "Product"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "Drillthrough"
+      },
+      {
+        "name": "028c85472ed101bb6105",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "City Order"
+              }
+            },
+            "Property": "store_city"
+          }
+        },
+        "type": "Categorical",
+        "filter": {
+          "Version": 2,
+          "From": [
+            {
+              "Name": "c",
+              "Entity": "City Order",
+              "Type": 0
+            }
+          ],
+          "Where": [
+            {
+              "Condition": {
+                "In": {
+                  "Expressions": [
+                    {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Source": "c"
+                          }
+                        },
+                        "Property": "store_city"
+                      }
+                    }
+                  ],
+                  "Values": [
+                    [
+                      {
+                        "Literal": {
+                          "Value": "'Bangalore'"
+                        }
+                      }
+                    ]
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        "howCreated": "Drillthrough"
+      },
+      {
+        "name": "4ab5aaa91b8abc0d978a",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Book1"
+              }
+            },
+            "Property": "store_city"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "Drillthrough"
+      }
+    ]
+  },
+  "pageBinding": {
+    "name": "b416b6c58e229aa07e7d",
+    "type": "Drillthrough",
+    "parameters": [
+      {
+        "name": "f752603f063e42b32698",
+        "boundFilter": "6b84d06a96a2ca59504a",
+        "fieldExpr": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Book1"
+              }
+            },
+            "Property": "city & Country"
+          }
+        }
+      },
+      {
+        "name": "a811a94076b626db16bc",
+        "boundFilter": "c8ee529ca7ae7a6e10cd",
+        "fieldExpr": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Book1"
+              }
+            },
+            "Property": "store_city"
+          }
+        }
+      },
+      {
+        "name": "115ad0b7454e3dc1c6f7",
+        "boundFilter": "d5f93615af3ff6d85249",
+        "fieldExpr": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Book1"
+              }
+            },
+            "Property": "Product"
+          }
+        }
+      },
+      {
+        "name": "888cb71ecb16c7108ad2",
+        "boundFilter": "028c85472ed101bb6105",
+        "fieldExpr": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "City Order"
+              }
+            },
+            "Property": "store_city"
+          }
+        }
+      },
+      {
+        "name": "0994e7a42cdbb1acd9a1",
+        "boundFilter": "4ab5aaa91b8abc0d978a",
+        "fieldExpr": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Book1"
+              }
+            },
+            "Property": "store_city"
+          }
+        }
+      }
+    ]
+  },
+  "objects": {
+    "outspace": [
+      {
+        "properties": {
+          "color": {
+            "solid": {
+              "color": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'#97CAC2'"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    ],
+    "background": [
+      {
+        "properties": {
+          "color": {
+            "solid": {
+              "color": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'#F7FFFD'"
+                  }
+                }
+              }
+            }
+          },
+          "transparency": {
+            "expr": {
+              "Literal": {
+                "Value": "0D"
+              }
+            }
+          }
+        }
+      }
+    ]
+  }
+}

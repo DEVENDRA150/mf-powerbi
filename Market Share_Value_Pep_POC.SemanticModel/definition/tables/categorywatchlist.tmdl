@@ -1,0 +1,148 @@
+table categorywatchlist
+	lineageTag: ea18f2d8-925a-4e63-9c1c-94570152ca02
+
+	measure Availability_Dip_Comp = [Comp_Availability_Perc] - [Comp_Availability_Yesterday]
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 9f77a349-e669-48cc-9c75-a6a056df1d3b
+
+	measure Availability_Dip_Own =
+			
+			// VAR selected_group = SELECTEDVALUE(Book1[oem_code_group_])
+			// RETURN
+			//     CALCULATE(
+			//         [Availability %],
+			//         Book1[oem_code_group_] = selected_group,
+			//         Book1[Brand_type_] = "Competition",       // Adjust field name if needed
+			//         REMOVEFILTERS(Book1[product])
+			//     )
+			
+			
+			
+			
+			
+			[Own Availavility %] - [Own_Availability_Yesterday]
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 708eb560-3eeb-439a-9241-896209fd451b
+
+	measure Discount_Comp_Yesterday = ```
+			
+			
+			VAR selected_group = SELECTEDVALUE(Book1[oem_code_group_])
+			RETURN
+			    CALCULATE(
+			        [Comp_Avg_Discount],
+			        'Calendar'[Date]=MAX(Book1[backend_inserted_date])
+			    )
+			
+			```
+		formatString: 0
+		lineageTag: cc6103d7-c851-4316-a152-cb4bac801b45
+
+	measure Discount_Dip_Comp = [Discount_Comp_Yesterday] - [Comp_Avg_Discount]
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 58b8b1dd-eb2f-4704-9fcc-d90ed3cde691
+
+	measure Discount_Dip_Own = [Discount_Own_Yesterday] - [Own Avg Discount]
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 17734f61-7c9f-4919-832c-ad80f7deba74
+
+	measure Discount_Own_Yesterday =
+			
+			
+			CALCULATE(
+			    [Own Avg Discount],
+			    'Calendar'[Date]=max(Book1[backend_inserted_date])
+			)
+		lineageTag: 4012c619-526f-4ca7-aeb7-baae0ab78c22
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Own_Availability_Yesterday =
+			
+			CALCULATE(
+			    [Own Availavility %],
+			    'Calendar'[Date]=max(Book1[backend_inserted_date])
+			)
+		lineageTag: ebe5e14c-f399-44a8-9185-f76ba6aab2d3
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Comp_Availability_Yesterday =
+			
+			VAR selected_group = SELECTEDVALUE(Book1[oem_code_group_])
+			RETURN
+			    CALCULATE(
+			        [Comp_Availability_Perc],
+			        Book1[Oem_code_group_] = selected_group,
+			        'Calendar'[Date]=max(Book1[backend_inserted_date]),
+			        REMOVEFILTERS(Book1[product])
+			    )
+		lineageTag: aa5fcd45-e854-4103-841c-6e8c9ac89c69
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Market_Share_Change_Day = [Avg_Share %] - [Market_Share_Prev_Day]
+		lineageTag: 2cfc837e-079b-4590-9be5-f060dbf8dbdd
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Market_Share_Prev_Day =
+			
+			VAR MaxDate =
+			    CALCULATE(MAX('Calendar'[Date]), ALL('Calendar'))
+			VAR ShareToday =
+			    CALCULATE([Avg_Share %], 'Calendar'[Date] = MaxDate)
+			RETURN
+			    ShareToday
+		formatString: 0
+		lineageTag: 16b222c8-0d00-4c2f-937c-54c942785305
+
+	measure 'Discount Differential' = ```
+			
+			// [Discount_Dip_Own] - [Discount_Dip_Comp]
+			
+			var a = [Discount_Own_Yesterday] - [Own Avg Discount]
+			
+			var b =  [Discount_Comp_Yesterday] - [Comp_Avg_Discount]
+			
+			RETURN a-b 
+			```
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 422276cd-e7c3-4ffa-8844-e78294fa8445
+
+	measure 'Availability Differential' =
+			
+			//  [Availability_Dip_Own] - [Availability_Dip_Comp]
+			
+			
+			 var a = [Comp_Availability_Perc] - [Comp_Availability_Yesterday]
+			
+			
+			
+			var b = [Own Availavility %] - [Own_Availability_Yesterday]
+			
+			// var a = [avail_Own_Yesterday] - [Own Avg Discount]
+			
+			// var b =  [Discount_Comp_Yesterday] - [Comp_Avg_Discount]
+			
+			RETURN b-a
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 2ec682f9-5e27-4328-b01f-ae3e3f0e6438
+
+	column Column
+		formatString: 0
+		lineageTag: e3130874-c5f6-49f8-9fc1-30a7e286213b
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Column]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition categorywatchlist = calculated
+		mode: import
+		source = Row("Column", BLANK())
+
+	annotation PBI_Id = 575630a77ac34fa88067340c89acf59c
+
+	annotation 436ba87b-9c83-4389-a31b-ebd06a36be98 = {"Expression":""}
+

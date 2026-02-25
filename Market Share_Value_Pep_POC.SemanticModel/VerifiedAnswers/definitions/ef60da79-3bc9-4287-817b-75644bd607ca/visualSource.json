@@ -1,0 +1,71 @@
+{
+  "visualType": "tableEx",
+  "query": {
+    "queryState": {
+      "Values": {
+        "projections": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Book1"
+                  }
+                },
+                "Property": "product_code"
+              }
+            },
+            "queryRef": "Book1.product_code",
+            "nativeQueryRef": "product_code"
+          },
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Book1"
+                  }
+                },
+                "Property": "sku"
+              }
+            },
+            "queryRef": "Book1.sku",
+            "nativeQueryRef": "sku"
+          },
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "0.0.  Measures"
+                  }
+                },
+                "Property": "Availability %"
+              }
+            },
+            "queryRef": "0.0.  Measures.Availability %",
+            "nativeQueryRef": "Availability %"
+          }
+        ]
+      }
+    },
+    "sortDefinition": {
+      "sort": [
+        {
+          "field": {
+            "Measure": {
+              "Expression": {
+                "SourceRef": {
+                  "Entity": "0.0.  Measures"
+                }
+              },
+              "Property": "Availability %"
+            }
+          },
+          "direction": "Ascending"
+        }
+      ]
+    }
+  },
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualConfiguration/2.1.0/schema.json"
+}

@@ -1,0 +1,124 @@
+table Velocity_measures
+	lineageTag: 6b8f8d42-ff18-45bb-9d40-3cfed641d255
+
+	measure 'Current Availability %' =
+			
+			VAR LatestDate =
+			    CALCULATE(MAX(Calendar[Date]), ALL(Calendar))
+			RETURN
+			    CALCULATE(
+			        [Availability %],
+			        Calendar[Date] = LatestDate
+			    )
+		lineageTag: ff575261-0ab8-43b4-971f-e145a506c523
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Forecasted Availability % (3 Days)' =
+			
+			VAR curr = [Current Availability %]
+			VAR velocity = [Change_in_Availability_7DayRolling]
+			VAR rawForecast = curr + (velocity * 3)
+			RETURN
+			    MAX(0, MIN(rawForecast, 1))
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 63de050d-cc88-41f4-8984-0e55934180d0
+
+	measure 'Days to Stockout' = ```
+			
+			VAR Threshold = 0.1 // 10% in decimal form
+			VAR curr = [Current Availability %]
+			VAR velocity = [Change_in_Availability_7DayRolling]
+			VAR estDays = IF(
+			    velocity < 0,
+			    (curr - Threshold) / ABS(velocity),
+			    BLANK()
+			)
+			RETURN
+			    IF(estDays < 0 || estDays > 30, BLANK(), ROUNDUP(estDays, 0))
+			
+			```
+		lineageTag: 4bded8f5-4a2a-4a82-91a9-3939b38d381e
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Change_in_Availability_7DayRolling = ```
+			
+			VAR CurrentDate = MAX(Calendar[Date])
+			RETURN
+			    AVERAGEX(
+			        DATESINPERIOD(
+			            Calendar[Date],
+			            CurrentDate,
+			            -7,
+			            DAY
+			        ),
+			        [Change_in_Availability]
+			    )
+			
+			```
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 42af8282-1a56-41c1-a56b-ee436432c336
+
+	measure 'Forecasted Availability % (7 Days)' =
+			
+			VAR curr = [Current Availability %]
+			VAR velocity = [Change_in_Availability_7DayRolling]
+			VAR rawForecast = curr + (velocity * 7)
+			RETURN
+			    MAX(0, MIN(rawForecast, 1))
+		lineageTag: 0b35349e-fa9b-476f-b867-c5ff0a074721
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Forecasted Availability % (10 Days)' = ```
+			
+			VAR curr = [Current Availability %]
+			VAR velocity = [Change_in_Availability_7DayRolling]
+			VAR rawForecast = curr + (velocity * 10)
+			RETURN
+			    MAX(0, MIN(rawForecast, 1))
+			
+			```
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 5957cee3-83cc-4791-86e3-a9029e25001f
+
+	measure 'Stockout Risk' = ```
+			
+			SWITCH(
+			    TRUE(),
+			    ISBLANK([Days to Stockout]), "Unknown",
+			    [Days to Stockout] <= 2, "High",
+			    [Days to Stockout] <= 5, "Medium",
+			    [Days to Stockout] > 5, "Low",
+			    "Unknown"
+			)
+			
+			```
+		lineageTag: 2b86c791-671c-45ce-a7df-9aa8a9a181e9
+
+	measure 'Availability % (Numeric)' =
+			
+			VAR pct = SUBSTITUTE([Availability %], "%", "")
+			RETURN DIVIDE(VALUE(pct), 100)
+		lineageTag: e8f01db3-6515-48a5-82be-30c9fc09d95c
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Column
+		formatString: 0
+		lineageTag: e9d8407a-85ef-4cba-8331-97c585ef899e
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Column]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Velocity_measures = calculated
+		mode: import
+		source = Row("Column", BLANK())
+
+	annotation PBI_Id = 43d4ad4ffc4f4daab05adf9b3e8a4f61
+
+	annotation 436ba87b-9c83-4389-a31b-ebd06a36be98 = {"Expression":""}
+

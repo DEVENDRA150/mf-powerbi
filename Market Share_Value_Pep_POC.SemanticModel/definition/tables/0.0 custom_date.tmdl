@@ -1,0 +1,82 @@
+table '0.0 custom_date'
+	lineageTag: 645fa83e-960b-4993-8b1e-fe2465cf5a6c
+
+	measure date1 = ```
+			
+			CALCULATE([own_market_share],TREATAS(VALUES(Calendar1[Date]),Book1[backend_inserted_date]),
+			    REMOVEFILTERS(Calendar2[Date]))
+			
+			
+			
+			// VAR date1_start_date = MIN ( Calendar1[Date] )
+			// VAR date1_end_date   = MAX ( Calendar1[Date] )
+			// VAR num =
+			//     CALCULATE (
+			//         [own_market_share],
+			        
+			//          FILTER(Book1,
+			//          Book1[backend_inserted_date] >= date1_start_date  && Book1[backend_inserted_date] <= date1_end_date)
+			//     )
+			//     RETURN num
+			
+			
+			
+			```
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 3d2d0138-21f4-423e-bf85-c94f128ec31b
+
+	measure date2 = ```
+			
+			CALCULATE([own_market_share],TREATAS(VALUES(Calendar2[Date]),Book1[backend_inserted_date]),
+			    REMOVEFILTERS(Calendar1[Date]))
+			
+			
+			// VAR date2_start_date = MIN ( Calendar2[Date] )
+			// VAR date2_end_date   = MAX ( Calendar2[Date] )
+			
+			// VAR last_days_sale =
+			//       CALCULATE (
+			//         [own_market_share],
+			//          FILTER(Book1,
+			//          Book1[backend_inserted_date]>=date2_start_date 
+			//          && 
+			//          Book1[backend_inserted_date]<=date2_end_date ))
+			// RETURN
+			//     last_days_sale
+			
+			
+			```
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 83909534-3011-47ad-9343-c18afcaf0fa4
+
+	measure own_market_share =
+			
+			var own_revenue  = CALCULATE(SUM(Book1[revenue]),Book1[Brand_type_]="Own")
+			var total_revenue  = CALCULATE(SUM(Book1[revenue]))
+			
+			RETURN DIVIDE(own_revenue,total_revenue)
+		lineageTag: 13552dec-5f4d-42bc-9b60-9619664c6a49
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Comaparsion Share' = [date2]-[date1]
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 1faa1dcd-9334-4eb6-bc5c-5ee7d9efebdc
+
+	column Column
+		formatString: 0
+		lineageTag: fd9736c2-34d8-4e65-b94a-11944a46c6d6
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Column]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition '0.0 custom_date' = calculated
+		mode: import
+		source = Row("Column", BLANK())
+
+	annotation PBI_Id = 12417e7134c6433cafefafd33ef9bacf
+
+	annotation 436ba87b-9c83-4389-a31b-ebd06a36be98 = {"Expression":""}
+

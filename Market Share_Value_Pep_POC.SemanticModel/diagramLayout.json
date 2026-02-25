@@ -1,0 +1,333 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 0,
+        "y": 75.164434519407749
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 2615.5760167410963,
+            "y": 0
+          },
+          "nodeIndex": "0.0.  Measures",
+          "nodeLineageTag": "6dfe5877-eb59-432d-bc3a-e82954030eb4",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 18
+        },
+        {
+          "location": {
+            "x": 1312.2457526513269,
+            "y": 4.6977771574629834
+          },
+          "nodeIndex": "Book1",
+          "nodeLineageTag": "70b4888b-0ac0-42e7-a98d-209520159073",
+          "size": {
+            "height": 234.23111979551825,
+            "width": 234
+          },
+          "zIndex": 19
+        },
+        {
+          "location": {
+            "x": 0,
+            "y": 147.00506691132321
+          },
+          "nodeIndex": "Calendar",
+          "nodeLineageTag": "c6079bf2-51a3-4980-b373-8b3f7a5e1c4d",
+          "size": {
+            "height": 170.05481150646926,
+            "width": 234
+          },
+          "zIndex": 8
+        },
+        {
+          "location": {
+            "x": 1680.2382966525943,
+            "y": 344.48279196234364
+          },
+          "nodeIndex": "Store id-mappping",
+          "nodeLineageTag": "62059141-1dd2-4c1e-837a-9da40b061edb",
+          "size": {
+            "height": 163.79110862985203,
+            "width": 234
+          },
+          "zIndex": 9
+        },
+        {
+          "location": {
+            "x": 3658.7463416217156,
+            "y": 289.09652275312629
+          },
+          "nodeIndex": "Velocity_measures",
+          "nodeLineageTag": "6b8f8d42-ff18-45bb-9d40-3cfed641d255",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 10
+        },
+        {
+          "location": {
+            "x": 2030.7510385342805,
+            "y": 381.4861401832319
+          },
+          "nodeIndex": "velocity_measures2",
+          "nodeLineageTag": "1b71d0a9-1ec2-405e-bc16-f8236752b006",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 11
+        },
+        {
+          "location": {
+            "x": 2209.83401535094,
+            "y": 615.40880762765107
+          },
+          "nodeIndex": "marketshare",
+          "nodeLineageTag": "c0f365d1-25c6-4104-b8db-cad8e7e43583",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 12
+        },
+        {
+          "location": {
+            "x": 2333.1111111111113,
+            "y": 387.74984305984918
+          },
+          "nodeIndex": "categorywatchlist",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 13
+        },
+        {
+          "location": {
+            "x": 1325.3588015888356,
+            "y": 608.36213591792387
+          },
+          "nodeIndex": "Category",
+          "nodeLineageTag": "688b72da-e7ee-437b-8d7a-7fb00a568bb3",
+          "size": {
+            "height": 204.50517732786443,
+            "width": 234
+          },
+          "zIndex": 14
+        },
+        {
+          "location": {
+            "x": 2890.1496310770312,
+            "y": 0
+          },
+          "nodeIndex": "sales loss measures",
+          "nodeLineageTag": "c1194b0c-2bcb-4434-80c4-6bba1941e937",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 15
+        },
+        {
+          "location": {
+            "x": 3244.2249025857082,
+            "y": 32.284710785349205
+          },
+          "nodeIndex": "OEM Level Measures",
+          "nodeLineageTag": "f696c1f7-251b-4a80-9f29-75d6119af60b",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 16
+        },
+        {
+          "location": {
+            "x": 343.914857108861,
+            "y": 627.88849941285707
+          },
+          "nodeIndex": "platform order",
+          "nodeLineageTag": "d0d17697-98e0-41ea-b715-ca7ea49835ff",
+          "size": {
+            "height": 145,
+            "width": 234
+          },
+          "zIndex": 17
+        },
+        {
+          "location": {
+            "x": 957.93370242063509,
+            "y": 631.30052352666917
+          },
+          "nodeIndex": "sub category order",
+          "nodeLineageTag": "998dff6b-382f-48ae-89b3-5b20cca70867",
+          "size": {
+            "height": 145,
+            "width": 234
+          },
+          "zIndex": 21
+        },
+        {
+          "location": {
+            "x": 666.84748206120855,
+            "y": 634.83824518649976
+          },
+          "nodeIndex": "Brand order",
+          "nodeLineageTag": "2f73be0b-2c56-49a2-9f72-003b032e5055",
+          "size": {
+            "height": 145,
+            "width": 234
+          },
+          "zIndex": 20
+        },
+        {
+          "location": {
+            "x": 1367.2474101527355,
+            "y": 839.5800151152921
+          },
+          "nodeIndex": "SOS -ITC",
+          "nodeLineageTag": "a59a3a0c-4c9b-48fb-8e32-e5fe77e77c13",
+          "size": {
+            "height": 371.16443451940779,
+            "width": 234
+          },
+          "zIndex": 5
+        },
+        {
+          "location": {
+            "x": 1850.1199764853354,
+            "y": 959.08519244315653
+          },
+          "nodeIndex": "SOS-Weights",
+          "nodeLineageTag": "6e1f2f0b-11d6-4461-93d7-a1635b8c195b",
+          "size": {
+            "height": 145,
+            "width": 234
+          },
+          "zIndex": 6
+        },
+        {
+          "location": {
+            "x": 2140.9511241950195,
+            "y": 733.99737981388171
+          },
+          "nodeIndex": "City Order",
+          "nodeLineageTag": "ee7646e9-5bc1-4e71-a0c4-0d26d9414780",
+          "size": {
+            "height": 145.19259982959852,
+            "width": 234
+          },
+          "zIndex": 7
+        },
+        {
+          "location": {
+            "x": 1849.6889404323138,
+            "y": 703.67271952512135
+          },
+          "nodeIndex": "Primary key sos_ms",
+          "nodeLineageTag": "650c164b-96df-47a8-88b5-9dc23b637200",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 22
+        },
+        {
+          "location": {
+            "x": 3860.3375638264715,
+            "y": 50.198954756125431
+          },
+          "nodeIndex": "Parameter",
+          "nodeLineageTag": "7d981764-1ba5-46c7-afd0-c6e15e4483d0",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 570.89507271629441,
+            "y": 206.70219492837134
+          },
+          "nodeIndex": "Calendar1",
+          "nodeLineageTag": "24055451-e20b-454d-be15-a9866b582ed9",
+          "size": {
+            "height": 145,
+            "width": 234
+          },
+          "zIndex": 23
+        },
+        {
+          "location": {
+            "x": 884.64766138022617,
+            "y": 208.26812064752565
+          },
+          "nodeIndex": "Calendar2",
+          "nodeLineageTag": "eae6bd94-1724-4492-ae3b-ac68c6dd7e3d",
+          "size": {
+            "height": 145,
+            "width": 234
+          },
+          "zIndex": 24
+        },
+        {
+          "location": {
+            "x": 3573.9095660012745,
+            "y": 37.160434790205784
+          },
+          "nodeIndex": "0.0 custom_date",
+          "nodeLineageTag": "645fa83e-960b-4993-8b1e-fe2465cf5a6c",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 4088.3952739899369,
+            "y": 856.13958590791935
+          },
+          "nodeIndex": "0.0. Qcom",
+          "nodeLineageTag": "6682576e-13e9-434f-8bce-89fa759071d3",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 4138.2102697299006,
+            "y": 62.215246296675019
+          },
+          "nodeIndex": "LegendSelector",
+          "nodeLineageTag": "b22de734-4147-4006-b4f0-8d564c9c7a4d",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 4
+        }
+      ],
+      "name": "All tables",
+      "zoomValue": 63.859989510871941,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "All tables",
+  "defaultDiagram": "All tables"
+}

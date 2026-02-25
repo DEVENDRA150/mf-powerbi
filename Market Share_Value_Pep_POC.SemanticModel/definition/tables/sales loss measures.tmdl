@@ -1,0 +1,302 @@
+table 'sales loss measures'
+	lineageTag: c1194b0c-2bcb-4434-80c4-6bba1941e937
+
+	measure Avg_Units_7Day =
+			
+			AVERAGEX(
+			    DATESINPERIOD(
+			        'Calendar'[Date],
+			        MAX('Calendar'[Date]),
+			        -30,
+			        DAY
+			    ),
+			    CALCULATE(SUM(Book1[inventory_change]))
+			)
+		lineageTag: d3bb299e-b7bf-4948-8bad-7534fa025fe1
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Sales_Loss_Units = ```
+			
+			VAR LastDate1 = CALCULATE(MAX('Calendar'[Date]), ALL('Calendar'))
+			VAR AvgUnits = 
+			    AVERAGEX(
+			        DATESINPERIOD(
+			            'Calendar'[Date],
+			            LastDate1,
+			            -1,
+			            DAY
+			        ),
+			        CALCULATE(SUM(Book1[inventory_change]))
+			    )
+			VAR UnitsYesterday =
+			    CALCULATE(
+			        SUM(Book1[inventory_change]),
+			        'Calendar'[Date] = LastDate1
+			    )
+			VAR LossUnits = AvgUnits - UnitsYesterday
+			RETURN
+			    IF(LossUnits > 0, LossUnits, 0)
+			```
+		lineageTag: 2c4b79ed-147f-4fc6-b082-f708d20da753
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure PSL =
+			
+			VAR LossUnits = [Sales_Loss_Units]
+			VAR ASP = CALCULATE(AVERAGE(Book1[asp]))  // Or whatever field is ASP
+			RETURN
+			    -1 * LossUnits * ASP
+		formatString: "₹"\ #,0.00;-"₹"\ #,0.00;"₹"\ #,0.00
+		lineageTag: d4397ebd-b4a2-47fd-b1f3-6c045fcf2138
+
+		annotation PBI_FormatHint = {"currencyCulture":"brx-IN"}
+
+	measure ASP_Own =
+			
+			CALCULATE(
+			    AVERAGE(Book1[asp]),
+			    Book1[Brand_type_] = "Own"
+			)
+		lineageTag: 0f59ecd7-319d-4f25-ac68-a9855db52340
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure PSL_output_final =
+			
+			VAR last_7_day_summarize =
+			 CALCULATE(AVERAGE(Book1[revenue]),Book1[Brand_type_] = "Own",DATESINPERIOD(Book1[backend_inserted_date],MAX(Book1[backend_inserted_date]),-7,DAY))
+			
+			VAR latest_ = CALCULATE(AVERAGE(Book1[revenue]),Book1[Brand_type_] = "Own",
+			        Book1[backend_inserted_date] = MAX(Book1[backend_inserted_date]))
+			
+			VAR Final_=  latest_ - last_7_day_summarize
+			
+			VAR final_output= IF(Final_ < 0,Final_,BLANK())
+			
+			RETURN
+			Final_
+			
+			//VAR LastDate1 = CALCULATE(MAX('Calendar'[Date]), ALL('Calendar'))
+			//VAR AvgUnits =
+			    //AVERAGEX(
+			        //DATESINPERIOD(
+			            //'Calendar'[Date],
+			            //LastDate1,
+			            //-7,
+			            //DAY
+			        //),
+			        //CALCULATE(
+			          //  SUM(Book1[inventory_change]),
+			            //Book1[Brand_type_] = "Own"
+			        //)
+			    //)
+			//VAR UnitsYesterday =
+			   // CALCULATE(
+			     //   SUM(Book1[inventory_change]),
+			       // 'Calendar'[Date] = LastDate1,
+			        //Book1[Brand_type_] = "Own"
+			    //)
+			//VAR LossUnits = AvgUnits - UnitsYesterday
+			//RETURN
+			  //  IF(LossUnits > 0, LossUnits, 0)
+		formatString: #,0
+		lineageTag: abe5140a-57b5-4045-b81c-cff623b04ce5
+
+	measure Measure
+		lineageTag: 6c1d4f5a-d70e-4e9a-9ac8-94e704e3b5e4
+
+		annotation 43dbc3e8-3a1c-4b6f-9923-b49ff7d6691c = True
+
+	measure Sales_Gain_Units =
+			
+			VAR LastDate1 = CALCULATE(MAX(Book1[backend_inserted_date]), ALL(Book1))
+			VAR AvgUnits =
+			    AVERAGEX(
+			        DATESINPERIOD(
+			            'Calendar'[Date],
+			            LastDate1,
+			            -7,
+			            DAY
+			        ),
+			        CALCULATE(SUMX(Book1,Book1[inventory_change]*Book1[mrp]))
+			    )
+			VAR UnitsYesterday =
+			    CALCULATE(
+			        SUMX(Book1,Book1[inventory_change]*Book1[mrp]),
+			        Book1[backend_inserted_date] = LastDate1
+			    )
+			VAR GainUnits = UnitsYesterday - AvgUnits
+			RETURN
+			    IF(GainUnits > 0, GainUnits, BLANK())
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			// VAR LastDate1 = CALCULATE(MAX('Calendar'[Date]), ALL('Calendar'))
+			// VAR AvgUnits =
+			//     AVERAGEX(
+			//         DATESINPERIOD(
+			//             'Calendar'[Date],
+			//             LastDate1,
+			//             -30,
+			//             DAY
+			//         ),
+			//         CALCULATE(SUM(Book1[inventory_change]))
+			//     )
+			// VAR UnitsYesterday =
+			//     CALCULATE(
+			//         SUM(Book1[inventory_change]),
+			//         'Calendar'[Date] = LastDate1
+			//     )
+			// VAR GainUnits = UnitsYesterday - AvgUnits
+			// RETURN
+			//     IF(GainUnits > 0, GainUnits, 0)
+		formatString: #,0.00
+		lineageTag: a804e710-98d2-4d1b-aa93-0481dc2e9714
+
+	measure PSG_Own =
+			[Sales_Gain_Units]
+			
+			
+			// VAR GainUnits = [Sales_Gain_Units]
+			// VAR ASP =
+			//    CALCULATE(
+			//        AVERAGE(Book1[asp]),
+			//        Book1[Brand_type_] = "Own"
+			//     )
+			// RETURN
+			//    GainUnits * ASP
+		formatString: "₹"\ #,0;-"₹"\ #,0;"₹"\ #,0
+		lineageTag: c3e11161-7338-4b7a-b35e-b97a225acf2e
+
+		annotation PBI_FormatHint = {"currencyCulture":"brx-IN"}
+
+	measure Inventory_DoD_Change =
+			
+			VAR UnitsToday =
+			    SUM(Book1[inventory_change])
+			VAR UnitsPrev =
+			    CALCULATE(
+			        SUM(Book1[inventory_change]),
+			        DATEADD('Calendar'[Date], -1, DAY)
+			    )
+			RETURN
+			    UnitsToday - UnitsPrev
+		formatString: 0
+		lineageTag: bbca5302-88e8-4ffd-9c05-2fb890224311
+
+	measure Change_vs_avg = ```
+			
+			  [Share%_Latest] - [Avg_Share %]
+			
+			
+			
+			
+			///VAR ResultAtGroup =
+			    ////VAR MaxDate = //CALCULATE(MAX('Calendar'[Date]), ALL('Calendar'))
+			    ////VAR ShareToday =
+			//        ////CALCULATE(
+			 //         // // [Share %],
+			 //          ////'Calendar'[Date] = MaxDate,
+			 //           ///REMOVEFILTERS(Book1[product//])
+			        ////)
+			    //////VAR AvgShare =
+			        //CALCULATE(
+			           // [Share %],
+			            //REMOVEFILTERS(Book1[product]),
+			            //REMOVEFILTERS('Calendar'[Date])
+			        //)
+			    //RETURN ShareToday - AvgShare
+			
+			////VAR ResultAtTotal =
+			    ////VAR MaxDate = //CALCULATE(MAX('Calendar'[Date]), ALL('Calendar'))
+			    ////VAR ShareToday =
+			//        //CALCULATE(
+			 //          // [Share %],
+			 //           //'Calendar'[Date] = MaxDate,
+			 //           /REMOVEFILTERS(Book1[product//])
+			        //)
+			    //////VAR AvgShare =
+			        //CALCULATE(
+			           // [Share %],
+			            //REMOVEFILTERS(Book1[product]),
+			            //REMOVEFILTERS('Calendar'[Date])
+			        //)
+			    //RETURN ShareToday - AvgShare
+			
+			//RETURN
+			  //  IF(
+			    //    ISINSCOPE(Book1[oem_code_group_]),
+			      //  ResultAtGroup,
+			       // ResultAtTotal
+			    //)
+			
+			```
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 906f65d5-e0f3-4882-8318-bfdce4299985
+
+	measure Category_Size = ```
+			
+			VAR TotalUnits = CALCULATE(
+			    SUM(Book1[revenue]),
+			    REMOVEFILTERS(Book1[product],Book1[Brand_type_]) // Optional, ensures it's at category aggregation
+			)
+			VAR AvgMRP = CALCULATE(
+			    AVERAGE(Book1[mrp]),
+			    REMOVEFILTERS(Book1[product],Book1[Brand_type_]) // Optional
+			)
+			RETURN
+			    TotalUnits * AvgMRP
+			
+			```
+		formatString: "₹"\ #,0;-"₹"\ #,0;"₹"\ #,0
+		lineageTag: b8b288e0-046a-480e-9816-dfb4e71f9176
+
+		annotation PBI_FormatHint = {"currencyCulture":"brx-IN"}
+
+	measure PSG_output_final =
+			
+			VAR last_7_day_summarize =
+			 CALCULATE(AVERAGEX(Book1,Book1[inventory_change] * Book1[mrp]),Book1[Brand_type_] = "Own",DATESINPERIOD(Book1[backend_inserted_date],MAX(Book1[backend_inserted_date]),-7,DAY))
+			
+			VAR latest_ = CALCULATE(AVERAGEX(Book1,Book1[inventory_change] * Book1[mrp]),Book1[Brand_type_] = "Own",
+			        Book1[backend_inserted_date] = MAX(Book1[backend_inserted_date]))
+			
+			VAR Final_=  latest_ - last_7_day_summarize
+			
+			VAR final_output= IF(Final_ > 0,Final_,BLANK())
+			
+			RETURN
+			final_output
+		lineageTag: 32ca60ea-15a2-4b1a-b183-4c3ec86fc521
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Column
+		formatString: 0
+		lineageTag: a8de3a0f-0a0f-4b12-bdcf-0299e8004c40
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Column]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'sales loss measures' = calculated
+		mode: import
+		source = Row("Column", BLANK())
+
+	annotation PBI_Id = 044616b1dc454f8ca6dfb4287c9efd48
+
+	annotation 436ba87b-9c83-4389-a31b-ebd06a36be98 = {"Expression":""}
+

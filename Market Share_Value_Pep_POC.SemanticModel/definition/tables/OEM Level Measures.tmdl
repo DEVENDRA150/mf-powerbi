@@ -1,0 +1,115 @@
+table 'OEM Level Measures'
+	lineageTag: f696c1f7-251b-4a80-9f29-75d6119af60b
+
+	measure Selected_OEM_Code = SELECTEDVALUE(Book1[Oem_code_group_])
+		lineageTag: b0fe0aca-8925-4c72-8a41-6e3a86bc4ec6
+
+	measure Share_OEM_Group =
+			
+			VAR selected_group = SELECTEDVALUE(Book1[oem_code_group_])
+			RETURN
+			    IF(
+			        ISINSCOPE(Book1[oem_code_group_]),
+			        CALCULATE(
+			            [Avg_Share %],
+			            Book1[oem_code_group_] = selected_group,
+			            REMOVEFILTERS(Book1[product])
+			        ),
+			        // For total row, aggregate over all groups visible
+			        CALCULATE(
+			            [Avg_Share %],
+			            REMOVEFILTERS(Book1[product])
+			        )
+			    )
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 2664dbbc-904d-4ff2-b628-f5217daed493
+
+	measure Comp_Avail_Pct_OEM =
+			
+			VAR oem = SELECTEDVALUE(Book1[Oem_code_group_])
+			RETURN
+			    CALCULATE(
+			        [Availability %],  // or your availability calculation
+			        FILTER(
+			            ALL(Book1),
+			            Book1[Oem_code_group_] = oem &&
+			            Book1[Brand_type_] <> "Own"  // Only competition
+			        )
+			    )
+		lineageTag: f1026c82-bea4-4d57-a44d-d5a4592a3f57
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure DOD_Change%_OEM_Group = ```
+			
+			VAR selected_group = SELECTEDVALUE(Book1[oem_code_group_])
+			VAR MaxDate =
+			    CALCULATE(MAX('Calendar'[Date]), ALL('Calendar'))
+			VAR PrevDate =
+			    CALCULATE(
+			        MAX('Calendar'[Date]),
+			        FILTER(
+			            ALL('Calendar'),
+			            'Calendar'[Date] < MaxDate
+			        )
+			    )
+			VAR ShareToday =
+			    CALCULATE(
+			        [Avg_Share %],
+			        Book1[oem_code_group_] = selected_group,
+			        'Calendar'[Date] = MaxDate,
+			        REMOVEFILTERS(Book1[product])         // Ensures not filtered to SKU
+			    )
+			VAR SharePrev =
+			    CALCULATE(
+			        [Avg_Share %],
+			        Book1[oem_code_group_] = selected_group,
+			        'Calendar'[Date] = PrevDate,
+			        REMOVEFILTERS(Book1[product])
+			    )
+			RETURN
+			    ShareToday - SharePrev
+			
+			```
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 4115cc4f-616e-49ed-bed8-8a72309b3ea5
+
+	measure Share%_Prev_Day_OEMGroup =
+			
+			VAR MaxDate =
+			    CALCULATE(MAX('Calendar'[Date]), ALL('Calendar'))
+			VAR selected_group =
+			    SELECTEDVALUE(Book1[oem_code_group_])
+			VAR ShareToday =
+			    CALCULATE(
+			        [Avg_Share %],
+			        Book1[oem_code_group_] = selected_group,
+			        'Calendar'[Date] = MaxDate,
+			        REMOVEFILTERS(Book1[product])
+			    )
+			RETURN
+			    ShareToday
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: eef70621-8970-40e6-a4f3-139ced3d24ea
+
+	measure Share_change_OEM = [Share%_Prev_Day_OEMGroup] - [Share_OEM_Group]
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: f29bd3af-2506-4d7f-8b94-2d93302b28f7
+
+	column Column
+		formatString: 0
+		lineageTag: 63c1e4bf-306b-4cb0-a855-9f452d53c003
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Column]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'OEM Level Measures' = calculated
+		mode: import
+		source = Row("Column", BLANK())
+
+	annotation PBI_Id = 702f9c3dcd7d43d8813b5b15f147ce64
+
+	annotation 436ba87b-9c83-4389-a31b-ebd06a36be98 = {"Expression":""}
+

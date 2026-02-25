@@ -1,0 +1,71 @@
+table SOS-Weights
+	lineageTag: 6e1f2f0b-11d6-4461-93d7-a1635b8c195b
+
+	column customer
+		dataType: string
+		lineageTag: 752adb23-b5e9-4432-aeb8-e8fe39ec691f
+		summarizeBy: none
+		sourceColumn: customer
+
+		annotation SummarizationSetBy = Automatic
+
+	column platform
+		dataType: string
+		lineageTag: c5a8fcb4-c628-4769-aebd-1cce069e6623
+		summarizeBy: none
+		sourceColumn: platform
+
+		annotation SummarizationSetBy = Automatic
+
+	column keyword
+		dataType: string
+		lineageTag: badc1f5c-dccf-47f4-af0d-9c2205fd9ebb
+		summarizeBy: none
+		sourceColumn: keyword
+
+		annotation SummarizationSetBy = Automatic
+
+	column weight
+		dataType: int64
+		formatString: 0
+		lineageTag: bba507e9-bcbe-4237-ad9b-fd54459da488
+		summarizeBy: none
+		sourceColumn: weight
+
+		annotation SummarizationSetBy = User
+
+	column weight_pk
+		dataType: string
+		lineageTag: 83692e72-bc91-41ea-b3d0-8f7037707cd0
+		summarizeBy: none
+		sourceColumn: weight_pk
+
+		annotation SummarizationSetBy = Automatic
+
+	column Primary_key_weights
+		dataType: string
+		lineageTag: d791c628-7ebd-4a7c-b0eb-d0c95be4586f
+		summarizeBy: none
+		sourceColumn: Primary_key_weights
+
+		annotation SummarizationSetBy = Automatic
+
+	partition SOS-Weights = m
+		mode: import
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"5c75ab08-ca44-42c8-9fe8-5e24ffb0ab0b" = Workspaces{[workspaceId="5c75ab08-ca44-42c8-9fe8-5e24ffb0ab0b"]}[Data],
+				    #"0fca6cad-48fd-4b5e-962e-839b22cc2188" = #"5c75ab08-ca44-42c8-9fe8-5e24ffb0ab0b"{[dataflowId="0fca6cad-48fd-4b5e-962e-839b22cc2188"]}[Data],
+				    #"ecomm-mappping_" = #"0fca6cad-48fd-4b5e-962e-839b22cc2188"{[entity="Weighatge - SOS",version=""]}[Data],
+				    #"Filtered Rows" = Table.SelectRows(#"ecomm-mappping_", each Text.StartsWith([customer], "CocaCola-")),
+				    #"concate" = Table.AddColumn(#"Filtered Rows", "weight_pk", each [customer]&[keyword]&[platform]),
+				    #"Removed Duplicates" = Table.Distinct(concate, {"weight_pk"})
+				in
+				    #"Removed Duplicates"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

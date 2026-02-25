@@ -1,0 +1,17 @@
+table 'sub category order'
+	lineageTag: 998dff6b-382f-48ae-89b3-5b20cca70867
+
+	column sub_category
+		lineageTag: 8361c501-2a72-4587-af21-648e84fdd157
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: Book1[sub_category]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'sub category order' = calculated
+		mode: import
+		source = DISTINCT(UNION(VALUES(Book1[sub_category]),VALUES(Book1[sub_category])))
+
+	annotation PBI_Id = c54a3ca0443345f8adeda05be1058b87
+

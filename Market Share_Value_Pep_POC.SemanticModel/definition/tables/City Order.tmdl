@@ -1,0 +1,17 @@
+table 'City Order'
+	lineageTag: ee7646e9-5bc1-4e71-a0c4-0d26d9414780
+
+	column store_city
+		lineageTag: 5805a92e-2ffd-4ec0-80e0-4b694be2cd4c
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: Book1[store_city]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'City Order' = calculated
+		mode: import
+		source = DISTINCT(VALUES(Book1[store_city]))
+
+	annotation PBI_Id = b1460cd76077439c912df93f2150d0f2
+

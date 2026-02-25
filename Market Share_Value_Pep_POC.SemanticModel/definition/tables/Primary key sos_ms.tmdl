@@ -1,0 +1,33 @@
+table 'Primary key sos_ms'
+	lineageTag: 650c164b-96df-47a8-88b5-9dc23b637200
+
+	column sos_pk
+		lineageTag: 4c56a93d-bad8-4fc4-87f7-57b5e7249a87
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: SOS -ITC[sos_pk]
+
+		annotation SummarizationSetBy = Automatic
+
+	column avg_rank
+		lineageTag: 2d8fe194-eff6-4dab-a07e-bcba55116fd8
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [avg_rank]
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column organic_sponsored = LOOKUPVALUE('SOS -ITC'[organic_sponsored_brand_sponsored],'SOS -ITC'[sos_pk],'Primary key sos_ms'[sos_pk],"Not Found")
+		lineageTag: a528f595-274b-415c-bc70-fdcfaf34ecc4
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Primary key sos_ms' = calculated
+		mode: import
+		source = SUMMARIZECOLUMNS('SOS -ITC'[sos_pk],"avg_rank",AVERAGE('SOS -ITC'[search_rank]))
+
+	annotation PBI_Id = fc021536891140058b6c4bbfaefc2894
+

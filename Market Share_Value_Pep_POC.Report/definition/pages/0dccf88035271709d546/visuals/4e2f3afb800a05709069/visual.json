@@ -1,0 +1,107 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.6.0/schema.json",
+  "name": "4e2f3afb800a05709069",
+  "position": {
+    "x": 346.03674540682414,
+    "y": 154.54068241469815,
+    "z": 1,
+    "height": 419.9475065616798,
+    "width": 707.19160104986872,
+    "tabOrder": 1
+  },
+  "visual": {
+    "visualType": "lineChart",
+    "query": {
+      "queryState": {
+        "Category": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Brand order"
+                    }
+                  },
+                  "Property": "brand"
+                }
+              },
+              "queryRef": "Brand order.brand",
+              "nativeQueryRef": "brand",
+              "active": true
+            }
+          ]
+        },
+        "Y": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "0.0 custom_date"
+                    }
+                  },
+                  "Property": "own_market_share"
+                }
+              },
+              "queryRef": "0.0 custom_date.own_market_share",
+              "nativeQueryRef": "own_market_share"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Measure": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "0.0 custom_date"
+                  }
+                },
+                "Property": "own_market_share"
+              }
+            },
+            "direction": "Descending"
+          }
+        ],
+        "isDefaultSort": true
+      }
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "60b6e6c4e23e9484d9bc",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Brand order"
+              }
+            },
+            "Property": "brand"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "de00f7464397135077c1",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "0.0 custom_date"
+              }
+            },
+            "Property": "own_market_share"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}

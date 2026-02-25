@@ -1,0 +1,81 @@
+table velocity_measures2
+	lineageTag: 1b71d0a9-1ec2-405e-bc16-f8236752b006
+
+	measure Sell_Through_7Day = ```
+			
+			VAR CurrentDate = MAX(Book1[backend_inserted_date])
+			RETURN
+			    AVERAGEX(
+			        DATESINPERIOD(
+			            Book1[backend_inserted_date], 
+			            CurrentDate, 
+			            -7, 
+			            DAY
+			        ),
+			        CALCULATE(SUM(Book1[inventory_change]))
+			    )
+			```
+		formatString: 0.00
+		lineageTag: eae6cbcd-32ff-4297-8f3a-a9f64f61626b
+
+	measure Sell_Through_3Day = ```
+			
+			VAR CurrentDate = MAX(Book1[backend_inserted_date])
+			RETURN
+			    AVERAGEX(
+			        DATESINPERIOD(
+			            Book1[backend_inserted_date],
+			            CurrentDate,
+			            -1,
+			            DAY
+			        ),
+			        CALCULATE(SUM(Book1[inventory_change]))
+			    )
+			
+			```
+		lineageTag: 904b78d3-3123-4b0f-8062-a1b46b73d239
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Rapid_Depletion_Spike =
+			
+			VAR rolling7 = [Sell_Through_7Day]
+			VAR rolling3 = [Sell_Through_3Day]
+			RETURN
+			    IF(
+			        NOT(ISBLANK(rolling7)) && rolling7 > 0 && rolling3 > rolling7 * 1.3,  // or any threshold
+			        1,
+			        0
+			    )
+		formatString: 0
+		lineageTag: 23460d3a-2eab-41e1-9a5f-a1d4d1177a51
+
+	measure Rapid_Depletion_Spike_Debug = ```
+			
+			VAR rolling7 = [Sell_Through_7Day]
+			VAR rolling3 = [Sell_Through_3Day]
+			RETURN
+			    rolling3 - rolling7
+			
+			```
+		lineageTag: a0fb2942-dcb5-40c2-85fd-90947e6f6d98
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Column
+		formatString: 0
+		lineageTag: f86c3de6-f003-4de2-b7e3-307fc23a45bb
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Column]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition velocity_measures2 = calculated
+		mode: import
+		source = Row("Column", BLANK())
+
+	annotation PBI_Id = e95e2683d6854a1cafac06c1c921bf24
+
+	annotation 436ba87b-9c83-4389-a31b-ebd06a36be98 = {"Expression":""}
+

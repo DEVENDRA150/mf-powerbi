@@ -1,0 +1,34 @@
+table LegendSelector
+	lineageTag: b22de734-4147-4006-b4f0-8d564c9c7a4d
+
+	column Brand_Type
+		lineageTag: 00a00d22-a9f6-4ec3-8d7f-b82ed17ac9b0
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Brand_Type]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Brand
+		lineageTag: 9a1d1871-898f-401e-8268-21efb802967a
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Brand]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition LegendSelector = calculated
+		mode: import
+		source = ```
+				DISTINCT (
+				    SELECTCOLUMNS (
+				        Book1,
+				        "Brand_Type", Book1[Brand_type_],
+				        "Brand", Book1[Brand]
+				    )
+				)
+				
+				```
+
+	annotation PBI_Id = f467a1c93cd3475aaab01bf29c0833e0
+

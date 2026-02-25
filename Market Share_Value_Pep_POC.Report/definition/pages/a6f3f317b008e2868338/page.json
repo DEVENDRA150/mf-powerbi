@@ -1,0 +1,74 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.0.0/schema.json",
+  "name": "a6f3f317b008e2868338",
+  "displayName": "New SKU Scorecard",
+  "displayOption": "FitToWidth",
+  "height": 1280,
+  "width": 1280,
+  "pageBinding": {
+    "name": "672e34ff0db864931cc3",
+    "type": "Default",
+    "parameters": [
+      {
+        "name": "985f459950a9488d0acc",
+        "boundFilter": "d24cad4a72c015f81ddb"
+      },
+      {
+        "name": "276021ebebd83b24c78f",
+        "boundFilter": "60836987c5cd5791c59e"
+      },
+      {
+        "name": "038af04a841680e3b582",
+        "boundFilter": "b813c370407a7a94eda4"
+      },
+      {
+        "name": "30e441f929002571da49",
+        "boundFilter": "8826830d2720b6e72654"
+      }
+    ]
+  },
+  "objects": {
+    "background": [
+      {
+        "properties": {
+          "color": {
+            "solid": {
+              "color": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'#F7FFFD'"
+                  }
+                }
+              }
+            }
+          },
+          "transparency": {
+            "expr": {
+              "Literal": {
+                "Value": "0D"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "outspace": [
+      {
+        "properties": {
+          "color": {
+            "solid": {
+              "color": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'#97CAC2'"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "visibility": "HiddenInViewMode"
+}

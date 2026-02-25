@@ -1,0 +1,44 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-IN
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["Book1","Store id-mappping","Category","SOS -ITC","SOS-Weights"]
+
+annotation PBI_ProTooling = ["WebModelingEdit","DevMode"]
+
+ref table Book1
+ref table '0.0.  Measures'
+ref table Calendar
+ref table 'Store id-mappping'
+ref table Velocity_measures
+ref table velocity_measures2
+ref table marketshare
+ref table categorywatchlist
+ref table 'sales loss measures'
+ref table 'OEM Level Measures'
+ref table 'platform order'
+ref table 'sub category order'
+ref table 'Brand order'
+ref table Category
+ref table DateTableTemplate_aabe2663-d1c6-4715-8e6d-b6cac9f0638e
+ref table 'SOS -ITC'
+ref table SOS-Weights
+ref table '0.0. Qcom'
+ref table 'City Order'
+ref table 'Primary key sos_ms'
+ref table Parameter
+ref table Calendar1
+ref table Calendar2
+ref table '0.0 custom_date'
+ref table LocalDateTable_f7e29499-1d9e-44e1-8697-86d9e190e091
+ref table LocalDateTable_66d52a0a-3ab5-4bae-a786-a214993dfa9f
+ref table LegendSelector
+
+ref cultureInfo en-US
+

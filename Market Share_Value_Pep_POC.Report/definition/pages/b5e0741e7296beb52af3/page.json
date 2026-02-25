@@ -1,0 +1,111 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.0.0/schema.json",
+  "name": "b5e0741e7296beb52af3",
+  "displayName": "Market Share Analysis",
+  "displayOption": "FitToWidth",
+  "height": 2400,
+  "width": 1280,
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "54b82e5330cc9a9c97b0",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Book1"
+              }
+            },
+            "Property": "category"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "Drillthrough"
+      }
+    ]
+  },
+  "pageBinding": {
+    "name": "2f107dd910b4c17370ae",
+    "type": "Default",
+    "parameters": [
+      {
+        "name": "f5810b56b4412042966d",
+        "boundFilter": "54b82e5330cc9a9c97b0",
+        "fieldExpr": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Book1"
+              }
+            },
+            "Property": "category"
+          }
+        }
+      }
+    ]
+  },
+  "objects": {
+    "background": [
+      {
+        "properties": {
+          "color": {
+            "solid": {
+              "color": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'#F7FFFD'"
+                  }
+                }
+              }
+            }
+          },
+          "transparency": {
+            "expr": {
+              "Literal": {
+                "Value": "0D"
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "type": "Drillthrough",
+  "visualInteractions": [
+    {
+      "source": "369b54e981b1adb7136d",
+      "target": "b0d9513abc460de968c3",
+      "type": "DataFilter"
+    },
+    {
+      "source": "b0d9513abc460de968c3",
+      "target": "369b54e981b1adb7136d",
+      "type": "DataFilter"
+    },
+    {
+      "source": "b0d9513abc460de968c3",
+      "target": "4e0bd9076453290da8c2",
+      "type": "NoFilter"
+    },
+    {
+      "source": "b0d9513abc460de968c3",
+      "target": "4a0cc0b7e029a70b0057",
+      "type": "NoFilter"
+    },
+    {
+      "source": "b0d9513abc460de968c3",
+      "target": "eceb42b002eedc7d870c",
+      "type": "NoFilter"
+    },
+    {
+      "source": "b0d9513abc460de968c3",
+      "target": "a201066d9db8a1d0001d",
+      "type": "NoFilter"
+    },
+    {
+      "source": "b0d9513abc460de968c3",
+      "target": "cd5e615d2a81d2c4178c",
+      "type": "NoFilter"
+    }
+  ]
+}

@@ -1,0 +1,283 @@
+table 'SOS -ITC'
+	lineageTag: a59a3a0c-4c9b-48fb-8e32-e5fe77e77c13
+
+	measure 'rank change' =
+			
+			
+			var yes_rank = CALCULATE(AVERAGE('Primary key sos_ms'[avg_rank]),'Calendar'[Date]=MAX(Book1[backend_inserted_date])-1,Book1[Brand_type_]="Own")
+			
+			var today_rank = CALCULATE(AVERAGE('Primary key sos_ms'[avg_rank]),'Calendar'[Date]=MAX(Book1[backend_inserted_date]),Book1[Brand_type_]="Own")
+			
+			return today_rank-yes_rank
+			
+			
+			
+			// var yes_rank = CALCULATE(AVERAGE('SOS -ITC'[search_rank]),'Calendar'[Date]=MAX('SOS -ITC'[backend_inserted_date])-1)
+			
+			// var today_rank = CALCULATE(AVERAGE('SOS -ITC'[search_rank]),'Calendar'[Date]=MAX('SOS -ITC'[backend_inserted_date]))
+			
+			// return today_rank-yes_rank
+		lineageTag: 4ca272c0-966e-4442-a123-e60ff3c1d766
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Weighted SOS Change' = ```
+			
+			var prev_change = 
+			DIVIDE(
+			 CALCULATE(SUM('SOS -ITC'[Weight]),'SOS -ITC'[backend_inserted_date]=MAX('SOS -ITC'[backend_inserted_date])-1),
+			 CALCULATE(SUM('SOS -ITC'[Weight]),ALL(),'SOS -ITC'[backend_inserted_date]=MAX('SOS -ITC'[backend_inserted_date])-1)
+			)
+			
+			var curr_change = 
+			DIVIDE(
+			 CALCULATE(SUM('SOS -ITC'[Weight]),'SOS -ITC'[backend_inserted_date]=MAX('SOS -ITC'[backend_inserted_date])),
+			 CALCULATE(SUM('SOS -ITC'[Weight]),ALL(),'SOS -ITC'[backend_inserted_date]=MAX('SOS -ITC'[backend_inserted_date])-1)
+			)
+			
+			
+			RETURN curr_change-prev_change
+			```
+		lineageTag: 742f84bd-0cf1-415e-b6b7-8f6e96ac8aee
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Spon rank Change' =
+			
+			CALCULATE([rank change],'Primary key sos_ms'[organic_sponsored]="Sponsored")
+		lineageTag: f4a74d97-82aa-498f-a868-ce6ac3645d34
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Organic rank Change' =
+			
+			CALCULATE([rank change],'Primary key sos_ms'[organic_sponsored]="Organic")
+		lineageTag: e44eb8d3-8331-4d12-8a71-c79674840f2d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column backend_inserted_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: ab0d2c92-5a72-4d26-834c-d14756ba844f
+		summarizeBy: none
+		sourceColumn: backend_inserted_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column customer
+		dataType: string
+		lineageTag: c14760a0-cfbb-4152-a51b-beeaf2685f3b
+		summarizeBy: none
+		sourceColumn: customer
+
+		annotation SummarizationSetBy = Automatic
+
+	column platform
+		dataType: string
+		lineageTag: acd30b78-565f-4f55-b646-64b116a6ec1e
+		summarizeBy: none
+		sourceColumn: platform
+
+		annotation SummarizationSetBy = Automatic
+
+	column keyword
+		dataType: string
+		lineageTag: aad10337-8287-45fb-98cb-e5aca5ed74d8
+		summarizeBy: none
+		sourceColumn: keyword
+
+		annotation SummarizationSetBy = Automatic
+
+	column brand_keyword_category
+		dataType: string
+		lineageTag: 70c8f008-4788-4cca-b300-79c23dfc1291
+		summarizeBy: none
+		sourceColumn: brand_keyword_category
+
+		annotation SummarizationSetBy = Automatic
+
+	column organic_sponsored_brand_sponsored
+		dataType: string
+		lineageTag: e7a450d0-a8fa-4185-8e58-0bd823a62e5d
+		summarizeBy: none
+		sourceColumn: organic_sponsored_brand_sponsored
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_code
+		dataType: string
+		lineageTag: da18c2cf-a073-474f-90b3-4cae8e43e74d
+		summarizeBy: none
+		sourceColumn: product_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column search_rank
+		dataType: int64
+		formatString: 0
+		lineageTag: 1e6c763c-c735-41e9-aee8-3ef898d90324
+		summarizeBy: sum
+		sourceColumn: search_rank
+
+		annotation SummarizationSetBy = Automatic
+
+	column weighted_PK = CONCATENATE('SOS -ITC'[customer],CONCATENATE('SOS -ITC'[keyword],'SOS -ITC'[platform]))
+		lineageTag: d5e43df0-6617-477b-8806-13577c213d6c
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column Weight = RELATED('SOS-Weights'[weight])
+		formatString: 0
+		lineageTag: eee6eec8-e6c6-4e62-820d-d8c259023c09
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column sos_pk = CONCATENATE('SOS -ITC'[customer],CONCATENATE('SOS -ITC'[product_code],'SOS -ITC'[param_3]))
+		lineageTag: b0a2cad2-bda9-4a2e-af24-b1a4a2756752
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column country
+		dataType: string
+		lineageTag: bae17790-09d1-498d-a7a1-efc8a59343ab
+		summarizeBy: none
+		sourceColumn: country
+
+		annotation SummarizationSetBy = Automatic
+
+	column pincode
+		dataType: string
+		lineageTag: 4e545880-c5ca-4ce4-9ec7-88e722294693
+		summarizeBy: none
+		sourceColumn: pincode
+
+		annotation SummarizationSetBy = Automatic
+
+	column asp
+		dataType: string
+		lineageTag: 531d2d2f-2ddc-4285-8286-c3a14350b2d4
+		summarizeBy: none
+		sourceColumn: asp
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_sub_category
+		dataType: string
+		lineageTag: e8bbfe98-1b60-4228-948e-904ffbd567ba
+		summarizeBy: none
+		sourceColumn: product_sub_category
+
+		annotation SummarizationSetBy = Automatic
+
+	column discount
+		dataType: string
+		lineageTag: f269118f-a5a3-41aa-89d1-a49f1c0133a2
+		summarizeBy: none
+		sourceColumn: discount
+
+		annotation SummarizationSetBy = Automatic
+
+	column mrp
+		dataType: string
+		lineageTag: 27b657ec-96c4-4322-a409-94aed4486b3c
+		summarizeBy: none
+		sourceColumn: mrp
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_rating
+		dataType: string
+		lineageTag: 959d738c-8930-4e4a-a621-7680add9a488
+		summarizeBy: none
+		sourceColumn: product_rating
+
+		annotation SummarizationSetBy = Automatic
+
+	column seller_name
+		dataType: string
+		lineageTag: fbc88ab9-bb94-45b6-abd6-1b9a097ada3b
+		summarizeBy: none
+		sourceColumn: seller_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column seller_type
+		dataType: string
+		lineageTag: 973b563a-a1ce-4c3c-b328-b0e03739d7b6
+		summarizeBy: none
+		sourceColumn: seller_type
+
+		annotation SummarizationSetBy = Automatic
+
+	column cpc
+		dataType: string
+		lineageTag: 25ef3473-53e3-4d0d-91ef-26bd9eb3b314
+		summarizeBy: none
+		sourceColumn: cpc
+
+		annotation SummarizationSetBy = Automatic
+
+	column ctr
+		dataType: string
+		lineageTag: aa87fa5f-feb0-4c67-a43d-aa738018a8fe
+		summarizeBy: none
+		sourceColumn: ctr
+
+		annotation SummarizationSetBy = Automatic
+
+	column traffic
+		dataType: string
+		lineageTag: dadfd20e-9d42-49fb-9619-7289f9f965c8
+		summarizeBy: none
+		sourceColumn: traffic
+
+		annotation SummarizationSetBy = Automatic
+
+	column unit_bought
+		dataType: string
+		lineageTag: 4595d261-936a-41e5-87cf-7d53e000ef7e
+		summarizeBy: none
+		sourceColumn: unit_bought
+
+		annotation SummarizationSetBy = Automatic
+
+	column Primary_Key_SOS
+		dataType: string
+		lineageTag: 8ef608c6-4259-4afc-b0e6-93cdb23402e5
+		summarizeBy: none
+		sourceColumn: Primary_Key_SOS
+
+		annotation SummarizationSetBy = Automatic
+
+	column param_3
+		dataType: string
+		lineageTag: 8c23ed0a-3b5b-44d5-bcaf-433b9e04e426
+		summarizeBy: none
+		sourceColumn: param_3
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'SOS -ITC' = m
+		mode: import
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"92f313e2-f02b-4cbf-bc2f-a852b309b5f8" = Workspaces{[workspaceId="1d634736-1220-48c2-815a-fb1a4c059800"]}[Data],
+				    #"2111f29c-a228-4265-9416-1656f681f3cd" = #"92f313e2-f02b-4cbf-bc2f-a852b309b5f8"{[dataflowId="12f9901d-9e63-4f68-a201-2c7bf9ed7530"]}[Data],
+				    output_sos_data_table_ = #"2111f29c-a228-4265-9416-1656f681f3cd"{[entity="output_sos_data_table",version=""]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(output_sos_data_table_,{{"search_rank", Int64.Type}}),
+				    #"Filtered Rows" = Table.SelectRows(#"Changed Type", each Text.StartsWith([customer], "CocaCola-"))
+				in
+				    #"Filtered Rows"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Exception
+

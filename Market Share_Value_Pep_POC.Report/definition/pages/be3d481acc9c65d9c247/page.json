@@ -1,0 +1,103 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.0.0/schema.json",
+  "name": "be3d481acc9c65d9c247",
+  "displayName": "Competition Analysis",
+  "displayOption": "FitToWidth",
+  "height": 1200,
+  "width": 1280,
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "22b5bcf641be3f5a2675",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Book1"
+              }
+            },
+            "Property": "Product"
+          }
+        },
+        "type": "Categorical",
+        "howCreated": "Drillthrough"
+      }
+    ]
+  },
+  "pageBinding": {
+    "name": "9af7c0553ae801063c5a",
+    "type": "Default",
+    "parameters": [
+      {
+        "name": "af4a1c71e1c4372482a3",
+        "boundFilter": "22b5bcf641be3f5a2675",
+        "fieldExpr": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Book1"
+              }
+            },
+            "Property": "Product"
+          }
+        }
+      }
+    ]
+  },
+  "objects": {
+    "background": [
+      {
+        "properties": {
+          "color": {
+            "solid": {
+              "color": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'#F7FFFD'"
+                  }
+                }
+              }
+            }
+          },
+          "transparency": {
+            "expr": {
+              "Literal": {
+                "Value": "0D"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "outspace": [
+      {
+        "properties": {
+          "color": {
+            "solid": {
+              "color": {
+                "expr": {
+                  "Literal": {
+                    "Value": "'#97CAC2'"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "type": "Drillthrough",
+  "visualInteractions": [
+    {
+      "source": "0992ff6bb526c0b2d417",
+      "target": "2189a57feedeeacf39b9",
+      "type": "NoFilter"
+    },
+    {
+      "source": "0992ff6bb526c0b2d417",
+      "target": "c9a1426ee52ec456e32c",
+      "type": "NoFilter"
+    }
+  ]
+}

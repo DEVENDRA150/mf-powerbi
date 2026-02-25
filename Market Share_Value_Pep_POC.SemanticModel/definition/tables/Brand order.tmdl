@@ -1,0 +1,17 @@
+table 'Brand order'
+	lineageTag: 2f73be0b-2c56-49a2-9f72-003b032e5055
+
+	column brand
+		lineageTag: 53b30a96-ab59-420d-88d7-a2ed6f34e4f3
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: Book1[brand]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Brand order' = calculated
+		mode: import
+		source = DISTINCT(UNION(VALUES(Book1[brand]),VALUES(Book1[brand])))
+
+	annotation PBI_Id = 03e1f3ef1b8c44899002563c7c122e6b
+

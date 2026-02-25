@@ -1,0 +1,59 @@
+table Category
+	lineageTag: 688b72da-e7ee-437b-8d7a-7fb00a568bb3
+
+	column table_category
+		dataType: string
+		lineageTag: b188e2db-4428-4f68-b00d-a3e661053538
+		summarizeBy: none
+		sourceColumn: table_category
+
+		annotation SummarizationSetBy = Automatic
+
+	column Category
+		dataType: string
+		lineageTag: a7499585-c8f0-4bf9-ada3-16960b5d9909
+		summarizeBy: none
+		sourceColumn: Category
+
+		annotation SummarizationSetBy = Automatic
+
+	column sub_category
+		dataType: string
+		lineageTag: 77c2fd37-82cb-4c2b-b7a4-8eae661402ac
+		summarizeBy: none
+		sourceColumn: sub_category
+
+		annotation SummarizationSetBy = Automatic
+
+	column display_sub_category
+		dataType: string
+		lineageTag: e29e8ec0-64bf-420b-9aeb-7bf6f6309d6b
+		summarizeBy: none
+		sourceColumn: display_sub_category
+
+		annotation SummarizationSetBy = Automatic
+
+	column pk_mapping = CONCATENATE(Category[table_category],Category[sub_category])
+		lineageTag: c68b4b25-d97e-45fd-8593-4069ca460bcf
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Category = m
+		mode: import
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"5c75ab08-ca44-42c8-9fe8-5e24ffb0ab0b" = Workspaces{[workspaceId="5c75ab08-ca44-42c8-9fe8-5e24ffb0ab0b"]}[Data],
+				    #"d65671e7-0861-466f-9952-e18bb734889e" = #"5c75ab08-ca44-42c8-9fe8-5e24ffb0ab0b"{[dataflowId="d65671e7-0861-466f-9952-e18bb734889e"]}[Data],
+				    config_ms_category_mapping_ = #"d65671e7-0861-466f-9952-e18bb734889e"{[entity="config_ms_category_mapping",version=""]}[Data],
+				    #"Removed Other Columns" = Table.SelectColumns(config_ms_category_mapping_,{"category", "sub_category", "display_category", "display_sub_category"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Other Columns",{{"category", "table_category"}, {"display_category", "Category"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

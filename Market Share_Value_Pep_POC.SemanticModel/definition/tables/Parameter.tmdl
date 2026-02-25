@@ -1,0 +1,48 @@
+table Parameter
+	lineageTag: 7d981764-1ba5-46c7-afd0-c6e15e4483d0
+
+	column Parameter
+		lineageTag: 56934289-c799-45a1-935b-de13a7484f81
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'Parameter Order'
+
+		relatedColumnDetails
+			groupByColumn: 'Parameter Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parameter Fields'
+		isHidden
+		lineageTag: e1d1b8eb-21f8-48b3-aa08-4818a51df50e
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'Parameter Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parameter Order'
+		isHidden
+		formatString: 0
+		lineageTag: b1e4fbb8-0386-4f5d-9115-304059140a61
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Parameter = calculated
+		mode: import
+		source =
+				{
+				    ("Discount", NAMEOF([Dynamic_discount]), 0),
+				    ("Availability %", NAMEOF([Dynamic_availability]), 1)
+				}
+
+	annotation PBI_Id = a7e82b47f24e4ff7ac563221f65ab62b
+

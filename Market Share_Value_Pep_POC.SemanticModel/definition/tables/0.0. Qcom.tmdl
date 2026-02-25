@@ -1,0 +1,319 @@
+table '0.0. Qcom'
+	lineageTag: 6682576e-13e9-434f-8bce-89fa759071d3
+
+	measure dev_Category_Size = CALCULATE(SUM(Book1[revenue]))
+		formatString: 0
+		lineageTag: 7d5312f3-c21d-450d-95d0-3561e1c5080b
+
+	measure dev_Last7Days_avg_Sales = ```
+			
+			CALCULATE(SUM(Book1[revenue]),DATESINPERIOD(Book1[backend_inserted_date], MAX(Book1[backend_inserted_date]), -7, DAY),Book1[Brand_type_]="Own")
+			
+			```
+		formatString: #,0
+		lineageTag: 1e875d28-670f-4a41-a680-60f821cecc79
+
+	measure 'Average Change %' = ```
+			
+			var last_7_days_own_sale = CALCULATE(SUM(Book1[revenue]),DATESINPERIOD(Book1[backend_inserted_date],MAX(Book1[backend_inserted_date]),-7,DAY),Book1[Brand_type_]="Own")
+			
+			var last_7_days_sale = CALCULATE(SUM(Book1[revenue]),DATESINPERIOD(Book1[backend_inserted_date],MAX(Book1[backend_inserted_date]),-7,DAY))
+			
+			RETURN DIVIDE(last_7_days_own_sale,last_7_days_sale)
+			
+			```
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 461dfcce-4567-40ad-8929-0ad2b3b2ab0f
+
+	measure 'lastest share' =
+			
+			var latest_sale = CALCULATE(SUM(Book1[revenue]),'Calendar'[Date]=max(Book1[backend_inserted_date]),Book1[Brand_type_]="Own")
+			var denom = CALCULATE(SUM(Book1[revenue]),'Calendar'[Date]=max(Book1[backend_inserted_date]))
+			// '0.0. dev'[dev_total_psl]
+			
+			RETURN DIVIDE(latest_sale,denom)
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 0ddd434b-d90f-45f9-a2ee-698a1bb91baf
+
+	measure 'change vs avg' =
+			
+			
+			[lastest share]- [Average Change %]
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 09857c28-e30f-42a0-9445-a074f5731183
+
+	measure 'PSL latest' = ```
+			
+			 ([change vs avg]) * CALCULATE(SUM(Book1[revenue])/DISTINCTCOUNT(Book1[backend_inserted_date]),DATESINPERIOD(
+			    Book1[backend_inserted_date],max(Book1[backend_inserted_date]),-7,DAY),Book1[Brand_type_]="Own")
+			```
+		formatString: "₹"\ #,0;-"₹"\ #,0;"₹"\ #,0
+		lineageTag: d36bee28-ef4b-456f-8cb0-f138d9ab3eea
+
+		annotation PBI_FormatHint = {"currencyCulture":"brx-IN"}
+
+	measure 'Cat Size' = CALCULATE(SUM(Book1[revenue]),ALLEXCEPT(Book1, Category[Category],'platform order'[Platform Clean]))
+		formatString: "₹"\ #,0;#,0\ -"₹";"₹"\ #,0
+		lineageTag: acef7c14-b788-45de-a08c-4cd57531b1b5
+
+		annotation PBI_FormatHint = {"currencyCulture":"bn-IN"}
+
+	measure psl_psg2 =
+			
+			
+			var total = CALCULATE(sum(Book1[revenue])/DISTINCTCOUNT(Book1[backend_inserted_date]),Book1[revenue]<>0)
+			var latest = CALCULATE(sum(Book1[revenue]),'Calendar'[Date]=max(Book1[backend_inserted_date]))
+			
+			RETURN latest - total
+		formatString: "₹"\ #,0;-"₹"\ #,0;"₹"\ #,0
+		lineageTag: feed1f8f-f7ee-4372-9690-79492d41635b
+
+		annotation PBI_FormatHint = {"currencyCulture":"brx-IN"}
+
+	measure 'Share % (Scoped)' =
+			
+			VAR _grp = SELECTEDVALUE(Book1[OEM_code_group_])
+			RETURN
+			IF(
+			    NOT ISBLANK(_grp),
+			    CALCULATE(
+			        [Avg_Share %],
+			        Book1[Brand_type_] = "Own",
+			        REMOVEFILTERS(Book1[Product]),
+			        TREATAS({ _grp }, Book1[OEM_code_group_])
+			    ),
+			    CALCULATE(
+			        [Avg_Share %],
+			        Book1[Brand_type_] = "Own",
+			        REMOVEFILTERS(Book1[Product])
+			    )
+			)
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 6b89d09a-4f6b-457c-bf36-01ccb0801f35
+
+	measure 'DOD Change (Scoped)' =
+			
+			VAR _curr = CALCULATE([Share % (Scoped)], LASTDATE('Calendar'[Date]))
+			VAR _prev = CALCULATE([Share % (Scoped)], LASTDATE(DATEADD('Calendar'[Date], -1, DAY)))
+			RETURN _curr - _prev
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 28ffe0b8-9ae9-4dde-ac64-127c9721f5ed
+
+	measure 'Share % (Entity in OEM Group)' =
+			
+			VAR _denom =
+			    CALCULATE(
+			        sum(Book1[revenue]),                                  -- your base metric
+			        ALLEXCEPT(                                         -- keep only these filters from Book1
+			            Book1,
+			            Book1[OEM_code_group_],                        -- keep group
+			            Book1[backend_inserted_date]                   -- keep date
+			        )
+			    )
+			RETURN
+			DIVIDE( sum(Book1[revenue]), _denom )
+		lineageTag: cf9a683d-9111-4c37-ac5f-b1f948422b77
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Revenue7days = SUMX(Book1,Book1[mrp]*Book1[inventory_change])
+		formatString: "₹"\ #,0;#,0\ -"₹";"₹"\ #,0
+		lineageTag: 1ef59d77-d90d-4631-ac36-96959aabd883
+
+		annotation PBI_FormatHint = {"currencyCulture":"bn-IN"}
+
+	measure OWN_Revenue7days = CALCULATE([Revenue7days],Book1[Brand_type_]="Own")
+		formatString: "₹"\ #,0;-"₹"\ #,0;"₹"\ #,0
+		lineageTag: 9f5fb96f-8f29-469e-926e-4d4dbe814956
+
+		annotation PBI_FormatHint = {"currencyCulture":"brx-IN"}
+
+	measure Revenue30days = SUMX(Book1,Book1[mrp] * Book1[inventory_change])
+		formatString: 0
+		lineageTag: da6227e5-fb13-48d4-81e3-4da15057a924
+
+	measure 'Change share % dod' =
+			
+			var yes_share  = CALCULATE([market share],'Calendar'[Date]=MAX('Calendar'[Date])-1)
+			
+			var today_share = CALCULATE([market share],'Calendar'[Date]=MAX('Calendar'[Date]))
+			
+			RETURN today_share-yes_share
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 963808af-7907-4b11-b5a6-9775910ac212
+
+	measure 'Average Vs 7 Days' = ```
+			
+			
+			VAR LatestDay_MarketShare =
+			    CALCULATE (
+			        [Market Share_competitve],  
+			        FILTER (
+			            ALL ( 'Calendar'[Date] ),
+			            'Calendar'[Date] = MAX ( 'Calendar'[Date] )
+			        )
+			    )
+			VAR Last7Days_Avg_MarketShare =
+			    CALCULATE (
+			        AVERAGEX (
+			            VALUES ( 'Calendar'[Date] ),
+			            [Market Share_competitve]
+			        ),
+			        DATESINPERIOD (
+			            'Calendar'[Date],
+			            MAX ( 'Calendar'[Date] ),
+			            -7,
+			            DAY
+			        )
+			    )
+			RETURN
+			    DIVIDE (
+			    LatestDay_MarketShare - Last7Days_Avg_MarketShare,
+			    Last7Days_Avg_MarketShare,
+			    BLANK()
+			)
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			```
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 682d7762-e779-4b0b-8fa1-4d54061aaa92
+
+	measure 'Avg. Discount' = AVERAGE(Book1[abs_discount])
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 93b7d7d3-706a-4b12-9ebe-bbcb63f8a895
+
+	measure 'Market Share_competitve' =
+			
+			DIVIDE (
+			    SUM ( Book1[revenue] ),
+			    CALCULATE (
+			        SUM ( Book1[revenue] ),
+			        ALLEXCEPT ( Book1, 'Calendar'[Date] )
+			    )
+			)
+		lineageTag: e8ace6fb-2ca0-4b5e-a97c-bb8bc726ce03
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Competitve rank change' =
+			
+			var lastday_rank = CALCULATE(AVERAGEA('Primary key sos_ms'[avg_rank]),
+			'Calendar'[Date]=MAX('Calendar'[Date])-1)
+			var today_rank = CALCULATE(AVERAGEA('Primary key sos_ms'[avg_rank]),
+			'Calendar'[Date]=MAX('Calendar'[Date]))
+			
+			RETURN lastday_rank - today_rank
+		lineageTag: 4efabbe9-1ece-4c1b-8cfe-2c69b53a848b
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Availability Differential_competitve' = ```
+			
+			var yesterday = CALCULATE([Availability %],'Calendar'[Date]=max('Calendar'[Date])-1)
+			var today_ = CALCULATE([Availability %],'Calendar'[Date]=max('Calendar'[Date]))
+			
+			RETURN yesterday-today_ 
+			```
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 91abae71-329e-4b7b-b19d-a323e6f5ac1a
+
+	measure 'Disount Differential_competitve' = ```
+			
+			var yesterday = CALCULATE(AVERAGE(Book1[abs_discount]),'Calendar'[Date]=max('Calendar'[Date])-1)
+			var today_ = CALCULATE(AVERAGE(Book1[abs_discount]),'Calendar'[Date]=max('Calendar'[Date]))
+			
+			RETURN yesterday-today_ 
+			```
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: c22c344b-5496-4fdf-bb7b-ace48d28725b
+
+	measure 'Avg. Discount_competitive' = AVERAGE(Book1[abs_discount])
+		formatString: 0%;-0%;0%
+		lineageTag: 9ae1c6f0-147d-4201-be13-b2fd08c40a88
+
+	measure 'Market Share Dynamic_trend' = ```
+			
+			VAR SelectedBrands = VALUES(LegendSelector[Brand]) 
+			RETURN
+			IF(MAX(Book1[Brand]) IN SelectedBrands,[Market Share],BLANK())
+			```
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 4627dd94-0252-41fa-aa6c-93068d22fc67
+
+	measure Dynamic_availability = ```
+			
+			VAR SelectedBrands = VALUES(LegendSelector[Brand]) 
+			RETURN
+			IF(MAX(Book1[Brand]) IN SelectedBrands,[Availability %],BLANK())
+			```
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 1bec4e25-6ab3-499d-8477-a60e18ba79c8
+
+	measure Dynamic_discount = ```
+			
+			VAR SelectedBrands = VALUES(LegendSelector[Brand]) 
+			RETURN
+			IF(MAX(Book1[Brand]) IN SelectedBrands,[Avg. Discount],BLANK())
+			```
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 743169cd-f8c4-495e-8470-fa0e0ea8cdab
+
+	measure date2_custom_market_share_comp =
+			
+			CALCULATE([market share],TREATAS(VALUES(Calendar2[Date]),Book1[backend_inserted_date]),
+			    REMOVEFILTERS(Calendar1[Date]))
+		lineageTag: 32bcc49d-8ce5-409e-b324-2e0b83579465
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure date1_custom_market_share_comp =
+			
+			CALCULATE([market share],TREATAS(VALUES(Calendar1[Date]),Book1[backend_inserted_date]),
+			    REMOVEFILTERS(Calendar2[Date]))
+		lineageTag: f0cf53e3-f654-4730-8edb-409690a84b00
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Comaparsion Share_comp' = [date2_custom_market_share_comp]-[date1_custom_market_share_comp]
+		lineageTag: 495de2cc-50ff-485d-b73c-fccd89ae3cf3
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Change_Color_customer_Comparision_share_comp = ```
+			
+			VAR Changevalue = [date1_custom_market_share_comp] - [date2_custom_market_share_comp] 
+			
+			RETURN
+			    SWITCH (
+			        TRUE(),
+			        Changevalue < 0, "#9DF1B7",   -- Red  
+			        Changevalue > 0, "#FFC3C1",   -- Green
+			        "#808080"                       -- Grey (no change)
+			    )
+			```
+		lineageTag: 2a1c3bd9-4630-4bf6-ae90-fda2fccc30e1
+
+	column Column
+		formatString: 0
+		lineageTag: 02f7b311-2e13-414d-bc8f-a108dfedc119
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Column]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition '0.0. Qcom' = calculated
+		mode: import
+		source = Row("Column", BLANK())
+
+	annotation PBI_Id = bf2bc818e66e49c5af898aafae9ede7e
+
+	annotation 436ba87b-9c83-4389-a31b-ebd06a36be98 = {"Expression":""}
+

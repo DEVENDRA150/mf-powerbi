@@ -1,0 +1,86 @@
+table 'Store id-mappping'
+	lineageTag: 62059141-1dd2-4c1e-837a-9da40b061edb
+
+	column platform
+		dataType: string
+		lineageTag: d71303ad-4251-4685-a7ae-ea8d377daefc
+		summarizeBy: none
+		sourceColumn: platform
+
+		annotation SummarizationSetBy = Automatic
+
+	column City
+		dataType: string
+		lineageTag: af50ce63-614d-4efe-889c-9ab2b74fe252
+		summarizeBy: none
+		sourceColumn: City
+
+		annotation SummarizationSetBy = Automatic
+
+	column pincode
+		dataType: string
+		lineageTag: b47e06d3-2cfb-4ecf-a77d-0a0d887cb9d8
+		summarizeBy: none
+		sourceColumn: pincode
+
+		annotation SummarizationSetBy = Automatic
+
+	column locality
+		dataType: string
+		lineageTag: ad078d15-e652-4bea-ad63-bded6064e00c
+		summarizeBy: none
+		sourceColumn: locality
+
+		annotation SummarizationSetBy = Automatic
+
+	column place_id
+		dataType: string
+		lineageTag: f25e1538-89c8-470f-a3f9-d857179a0d81
+		summarizeBy: none
+		sourceColumn: place_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column store_id
+		dataType: string
+		lineageTag: 19366c84-bc9a-4826-9c13-c669c24fed85
+		summarizeBy: none
+		sourceColumn: store_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column store_name
+		dataType: string
+		lineageTag: 8b1a6f18-fd92-4423-8d38-dd4bdadd29aa
+		summarizeBy: none
+		sourceColumn: store_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_serviceable
+		dataType: int64
+		formatString: 0
+		lineageTag: 1627b5b7-80eb-4093-bf68-f318a06ad4dc
+		summarizeBy: none
+		sourceColumn: is_serviceable
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Store id-mappping' = m
+		mode: import
+		source =
+				let
+				    Source = PowerPlatform.Dataflows(null),
+				    Workspaces = Source{[Id="Workspaces"]}[Data],
+				    #"5c75ab08-ca44-42c8-9fe8-5e24ffb0ab0b" = Workspaces{[workspaceId="5c75ab08-ca44-42c8-9fe8-5e24ffb0ab0b"]}[Data],
+				    #"789fe80a-303b-4f14-ba0d-839cbfefe2db" = #"5c75ab08-ca44-42c8-9fe8-5e24ffb0ab0b"{[dataflowId="789fe80a-303b-4f14-ba0d-839cbfefe2db"]}[Data],
+				    #"ecomm-mappping_" = #"789fe80a-303b-4f14-ba0d-839cbfefe2db"{[entity="ecomm-mappping",version=""]}[Data],
+				    #"Removed Duplicates" = Table.Distinct(#"ecomm-mappping_", {"store_id"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Removed Duplicates",{{"city", "City"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
